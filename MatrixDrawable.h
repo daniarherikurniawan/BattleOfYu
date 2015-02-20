@@ -4,6 +4,7 @@
 #include <vector>
 #include <cstdio>
 #include "Drawable.h"
+#include "CompositeDrawable.h"
 #include <queue>
 
 class MatrixDrawable : public Drawable{
@@ -14,6 +15,7 @@ private:
 public:
   MatrixDrawable(Drawable *drawable);
   MatrixDrawable(const MatrixDrawable& other);
+  MatrixDrawable();
   ~MatrixDrawable();
   vector<Pixel> getPixels() const;
   int getLeftMostX() const;

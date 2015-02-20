@@ -1,5 +1,9 @@
 #include "MatrixDrawable.h"
 
+MatrixDrawable::MatrixDrawable() {
+  
+}
+
 MatrixDrawable::MatrixDrawable(Drawable *drawable) {
   mWidth = drawable->getWidth();
   mHeight = drawable->getHeight();
