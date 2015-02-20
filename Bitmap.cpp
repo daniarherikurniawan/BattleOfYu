@@ -86,6 +86,26 @@ vector<Pixel> Bitmap::getPixels() const{
 	return pixels;
 }
 
+void Bitmap::translate(int dx,int dy){
+	Point p = this->getBeginPoint();
+	p.translate(dx,dy);
+	this->setBeginPoint(p);
+	
+	for(int i = 0; i < pixels.size(); i++){
+		pixels[i].translate(dx,dy);
+	}
+}
+
+void Bitmap::rotate(int angle,int x0,int y0){
+	Point p = this->getBeginPoint();
+	p.rotate(angle,x0,y0);
+	this->setBeginPoint(p);
+	
+	for(int i = 0; i < pixels.size(); i++){
+		pixels[i].rotate(angle,x0,y0);
+	}
+}
+
 Bitmap Bitmap::rotate(int angle) {
 	float radians=(2*3.1416*angle)/360; 
 

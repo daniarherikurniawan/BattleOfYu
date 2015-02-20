@@ -38,6 +38,7 @@ void LaserBullet::rotate(int angle) {
 	this->H = this->bitmap.getHeight();
 }
 
+
 int Bullet::getLeftMostX() const{
 	return this->bitmap.getLeftMostX();
 }
@@ -46,6 +47,12 @@ int Bullet::getTopMostY() const{
 	return this->bitmap.getTopMostY();
 }
 
+void Bullet::translate(int dx,int dy){
+	printf("Bullet::translate not supported\n");
+}
+void LaserBullet::rotate(int angle,int x0,int y0){
+	printf("Laserbullet::rotate not supported\n");
+}
 
 LaserBullet::~LaserBullet(){
 

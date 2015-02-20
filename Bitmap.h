@@ -29,5 +29,8 @@ public :
 	virtual Bitmap rotate(int angle); // derajat
 	int getLeftMostX() const;
 	int getTopMostY() const;
+	
+	void translate(int dx,int dy);
+	void rotate(int angle,int x0,int y0);
 };
 #endif

@@ -25,6 +25,7 @@ public:
 	bool arah;
 	int getLeftMostX() const;
 	int getTopMostY() const;
+	virtual void translate(int dx,int dy);
 };
 
 class LaserBullet : public Bullet {
@@ -36,6 +37,7 @@ public:
 	LaserBullet (const LaserBullet &obj) : Bullet(obj) { W = obj.W; H=obj.H;}
 	virtual LaserBullet* clone() {return new LaserBullet (*this);}
 	virtual void rotate(int angle);
+	virtual void rotate(int angle,int x0,int y0);
 	virtual ~LaserBullet();
 	int W,H;
 };

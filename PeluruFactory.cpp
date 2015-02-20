@@ -18,7 +18,7 @@ public:
 	Bitmap bitmap;
 	virtual vector<Pixel> getPixels() {return bitmap.getPixels();}
 	virtual void rotate(int angle) {this->bitmap = this->bitmap.rotate(angle);this->angle += angle;}
-
+	virtual void rotate(int angle,int x0,int y0){ printf("Bullet::rotate(int,int,int) not supported\n");}
 	int angle;
 	int trail_length;
 	void setPoint (Point p) {this->p = p; bitmap.setBeginPoint(p);}
@@ -31,6 +31,7 @@ public:
 	LaserBullet (const LaserBullet &obj) : Bullet(obj) { W = obj.W; H=obj.H;}
 	virtual LaserBullet* clone() {return new LaserBullet (*this);}
 	virtual void rotate(int angle);
+	virtual void rotate(int angle,int x0,int y0){ printf("LaserBullet::rotate(int,int,int) not supported\n"); }
 	virtual ~LaserBullet();
 	int W,H;
 };

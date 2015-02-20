@@ -80,3 +80,14 @@ int CompositeDrawable::getTopMostY() const{
   return mTopMostY + mPositionY;
 }
 
+
+void CompositeDrawable::translate(int dx,int dy){
+	for(int i = 0; i < mDrawables.size(); i++)
+	  mDrawables[i]->translate(dx,dy);
+}
+
+void CompositeDrawable::rotate(int angle,int x0,int y0){
+	for(int i = 0; i < mDrawables.size(); i++){
+		mDrawables[i]->rotate(angle,x0,y0);
+	}
+}

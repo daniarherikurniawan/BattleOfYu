@@ -5,7 +5,7 @@
 #include <cstdlib>
 #include <cstdio>
 
-class Line : public Drawable {
+class Line : public Drawable{
 private :
 	Point mBeginPoint;
 	Point mEndPoint;
@@ -16,6 +16,9 @@ public :
 	vector<Pixel> getPixels() const;
 	int getLeftMostX() const;
 	int getTopMostY() const;
+	
+	void translate(int dx,int dy);
+	void rotate(int angle,int x0,int y0);
 };
 
 #endif
