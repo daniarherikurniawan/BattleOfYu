@@ -35,23 +35,30 @@ int main() {
 	Keyboard::startListening();
 	
 	propeller.setDrawPosition(200,200);
+	
+	ship.rotate(90,100,100);
 	ship.setPosition(300,300);
-	//ship.rotate(90,100,100);
 	
 	plane.setPosition(200,200);
 	
 	Point center(0,0);
 	propeller.setCenter(center);
-	float i=0.5;
+	float i=0.0;
 	while(true){
 		handleInput();
 		screen.beginBatch();
 		propeller.draw(&screen);
 		
-		screen.draw(&ship,1.0f);
-		screen.draw(&plane,1.0f);
+		
+		if (i > 0.1){
+			i = 0.0;
+			ship.rotate(45,100,100);
+			plane.rotate(45,100,150);
+		}
+		screen.draw(&ship,false);
+		screen.draw(&plane,false);
 		screen.endBatch();
-		i+=0.001;
+		i+=0.00001;
 	}
 	
 	return 0;	

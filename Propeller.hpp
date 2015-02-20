@@ -13,8 +13,8 @@
 #define PROPELLER_MOVE 1
 #define PROPELLER_DEAD 2
 #define PROPELLER_DEFAULT_DELAY 1.0f
-#define PROPELLER_DEFAULT_SPEED 0.05f
-#define PROPELLER_DEFAULT_ROTATION_DEGREE 10
+#define PROPELLER_DEFAULT_SPEED 0.01f
+#define PROPELLER_DEFAULT_ROTATION_DEGREE 1
 
 class Propeller {
 	int state;
@@ -73,10 +73,9 @@ void Propeller::translate(int dx,int dy){
 void Propeller::beforeDraw(){
 	current_counter += speed;
 	if (current_counter > delay_counter){
-  	current_counter = 0;
-  	c_draw_elmt->translate(-1,-1);
-  	this->selfRotate(PROPELLER_DEFAULT_ROTATION_DEGREE);
-  }
+		current_counter = 0;
+		this->selfRotate(PROPELLER_DEFAULT_ROTATION_DEGREE);
+	}
 }
 
 void Propeller::selfRotate(int degree){

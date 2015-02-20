@@ -13,13 +13,15 @@
 #define PROPELLER_MOVE 1
 #define PROPELLER_DEAD 2
 #define PROPELLER_DEFAULT_DELAY 1.0f
-#define PROPELLER_DEFAULT_SPEED 0.005f
+#define PROPELLER_DEFAULT_SPEED 0.001f
+#define PROPELLER_DEFAULT_ROTATION_DEGREE 1
+
 class Propeller {
 	int state;
-	float rotation;
+	Point center;
+	
 	CompositeDrawable* c_draw_elmt;
-	MatrixDrawable* m_draw_elmt;
-	int pos_x,pos_y;
+	int pos_x,pos_y; //left draw position
 	float delay_counter; //harus mencapai ini sebelum diupdate
 	float current_counter;
 	float speed;
@@ -30,33 +32,36 @@ public:
 	Propeller(string filename);
 	~Propeller();
 	void draw(Screen* screen);
-	void setPosition(int _x,int _y);
+	void setDrawPosition(int _x,int _y);
 	void setState(int state);
 	void translate(int dx,int dy);
-	void rotate(float degree);
-	void rotate(float degree,int x0,int y0);
+	void rotate(int degree,int x0,int y0);
+	void selfRotate(int degree); //rotate based on the current center
+	void setCenter(Point p);
 };
 
 Propeller::Propeller(string filename){
 	c_draw_elmt = new CompositeDrawable(filename);
-	m_draw_elmt = new MatrixDrawable(c_draw_elmt);
+	//m_draw_elmt = new MatrixDrawable(c_draw_elmt);
 	current_counter = 0;
-	speed = PROPELLER_DEFAULT_DELAY;
+	speed = PROPELLER_DEFAULT_SPEED;
+	delay_counter = PROPELLER_DEFAULT_DELAY;
 }
 
 Propeller::~Propeller(){
 	delete (c_draw_elmt);
-	delete (m_draw_elmt);
 }
 
-void Propeller::setPosition(int _x,int _y){
+void Propeller::setDrawPosition(int _x,int _y){
 	pos_x = _x; pos_y = _y;
-	m_draw_elmt->setPosition(_x,_y);
+	c_draw_elmt->setPosition(_x,_y);
 }
+
+void Propeller::setCenter(Point p){ this->center = p; }
 
 void Propeller::draw(Screen* screen){
   this->beforeDraw();
-	screen->draw(c_draw_elmt,1.0f);
+  screen->draw(c_draw_elmt,1.0f);
 }
 
 void Propeller::setState(int _state){ state = _state; }
@@ -68,9 +73,13 @@ void Propeller::translate(int dx,int dy){
 void Propeller::beforeDraw(){
 	current_counter += speed;
 	if (current_counter > delay_counter){
-  	current_counter = 0;
-  	c_draw_elmt->translate(dx,dy);
-  }
+		current_counter = 0;
+		this->selfRotate(PROPELLER_DEFAULT_ROTATION_DEGREE);
+	}
+}
+
+void Propeller::selfRotate(int degree){
+	c_draw_elmt->rotate(degree,center.x,center.y);
 }
 
 #endif
