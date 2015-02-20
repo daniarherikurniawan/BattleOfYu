@@ -87,7 +87,5 @@ void CompositeDrawable::translate(int dx,int dy){
 }
 
 void CompositeDrawable::rotate(int angle,int x0,int y0){
-	for(int i = 0; i < mDrawables.size(); i++){
-		mDrawables[i]->rotate(angle,x0,y0);
-	}
+	
 }

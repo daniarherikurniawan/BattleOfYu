@@ -1,0 +1,77 @@
+#include "Pixel.h"
+#include "Screen.h"
+#include "Line.h"
+#include "CompositeDrawable.h"
+#include "MatrixDrawable.h"
+#include "Keyboard.h"
+#include "Util.h"
+
+#ifndef __PROPELLER_HPP
+#define __PROPELLER_HPP
+
+#define PROPELLER_IDLE 0
+#define PROPELLER_MOVE 1
+#define PROPELLER_DEAD 2
+#define PROPELLER_DEFAULT_DELAY 1.0f
+#define PROPELLER_DEFAULT_SPEED 0.005f
+class Propeller {
+	int state;
+	float rotation;
+	CompositeDrawable* c_draw_elmt;
+	MatrixDrawable* m_draw_elmt;
+	int pos_x,pos_y;
+	float delay_counter; //harus mencapai ini sebelum diupdate
+	float current_counter;
+	float speed;
+	
+	void beforeDraw();
+	
+public:
+	Propeller(string filename);
+	~Propeller();
+	void draw(Screen* screen);
+	void setPosition(int _x,int _y);
+	void setState(int state);
+	void translate(int dx,int dy);
+	void rotate(float degree);
+	void rotate(float degree,int x0,int y0);
+};
+
+Propeller::Propeller(string filename){
+	c_draw_elmt = new CompositeDrawable(filename);
+	m_draw_elmt = new MatrixDrawable(c_draw_elmt);
+	current_counter = 0;
+	speed = PROPELLER_DEFAULT_DELAY;
+}
+
+Propeller::~Propeller(){
+	delete (c_draw_elmt);
+	delete (m_draw_elmt);
+}
+
+void Propeller::setPosition(int _x,int _y){
+	pos_x = _x; pos_y = _y;
+	m_draw_elmt->setPosition(_x,_y);
+}
+
+void Propeller::draw(Screen* screen){
+  this->beforeDraw();
+	screen->draw(c_draw_elmt,1.0f);
+}
+
+void Propeller::setState(int _state){ state = _state; }
+
+void Propeller::translate(int dx,int dy){
+	c_draw_elmt->translate(dx,dy);
+}
+
+void Propeller::beforeDraw(){
+	current_counter += speed;
+	if (current_counter > delay_counter){
+  	current_counter = 0;
+  	c_draw_elmt->translate(dx,dy);
+  }
+}
+
+#endif
+

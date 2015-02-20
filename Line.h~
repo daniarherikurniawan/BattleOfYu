@@ -4,6 +4,7 @@
 #include "Drawable.h"
 #include <cstdlib>
 #include <cstdio>
+#include "IGeometry.hpp"
 
 class Line : public Drawable{
 private :
@@ -18,7 +19,6 @@ public :
 	int getTopMostY() const;
 	
 	void translate(int dx,int dy);
-	void rotate(int angle,int x0,int y0);
 };
 
 #endif

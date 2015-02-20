@@ -3,19 +3,8 @@
 struct Point;
 struct Color;
 void Pixel::translate(int dx,int dy){
-	Point p = this->getPosition();
+	Point p = this->getPositon();
 	p.translate(dx,dy);
-	this->setPosition(p);
-}
-void Pixel::rotate(int angle){
-	Point p = this->getPosition();
-	p.rotate(angle);
-	this->setPosition(p);
-}
-
-void Pixel::rotate(int angle,int x0,int y0){
-	Point p = this->getPosition();
-	p.rotate(angle,x0,y0);
 	this->setPosition(p);
 }
 

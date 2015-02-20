@@ -26,7 +26,6 @@ public:
 	
   int applyGravity(int velocity); // return = 1 jika objek sudah sampai "tanah"
 	void translate(int dx,int dy);
-  void rotate(int angle,int x0,int y0);
 };
 
 #endif
