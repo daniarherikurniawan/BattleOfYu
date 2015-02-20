@@ -8,9 +8,11 @@
 #include "Util.h"
 #include "Keyboard.h"
 #include "Peluru.h"
+#include <unistd.h>
 
 
-const long long SECONDS_PER_FRAME = 250/60;
+const long long SECONDS_PER_FRAME = 1000/60; // yang ini speed looping gamenya
+const int FRAMERATE = 25000; // yang ini speed buat efek pesawat jatoh dkk
 
 Point position(5,5);
 Color color(0,255,0,0);
@@ -40,6 +42,13 @@ float shipEx = 0.0f;
 
 bool isFlipShip = false;
 bool isFlipPlane = false;
+
+// state di dalam game
+bool isFinish = false;
+bool isAftermath = false;
+
+// state di aftermath
+bool isPlaneGrounded = false;
 
 BulletFactory bf;
 Bullet *b[100]; // = bf.create(BulletFactory::LASER);
@@ -130,12 +139,12 @@ int main() {
 	
 	ship.fillWithFloodFill(f_pos,&fish);
 	
-	
-	
-	
-	
+
 	int ii = 0;
+
+	int speed = 0;
 	
+	/* Game Clock */
 	while (true) {
 		if (accumulateTime>(SECONDS_PER_FRAME)) {
 			handleInput();
@@ -151,11 +160,28 @@ int main() {
 			  screen.draw(&meledak, planeEx);
 			  
 			  if (planeEx > 2){
+
 			      screen.beginBatch();
 			      screen.endBatch();
-			      gotoxy(10, 10);
-			      printf("SHIP WIN!\n\n\n\n\n\n\n\n\n\n");
-			      exit(0);
+
+			  	  isPlane = false;
+			      isAftermath = true;
+
+				  /* TODO:
+			         - Animasi pesawat pecah
+			         - Kasih Gravity tiap pecahan pesawat biar jatuh:
+			           - baling-baling
+			           - ban
+			           - potongan badan pesawat
+			           - pilot keluar dari pesawat pake parasut
+			         - Bikin ban mantul-mantul di atas tanah -_-
+			      */
+
+			      // gotoxy(10, 10);
+			      // printf("SHIP WIN!\n\n\n\n\n\n\n\n\n\n");
+
+			      // exit(0);
+
 			  }
 			}else	screen.draw(&plane, isFlipPlane);
 			
@@ -170,9 +196,10 @@ int main() {
 			      screen.endBatch();
 			      gotoxy(10, 10);
 			      printf("PLANE WIN!\n\n\n\n\n\n\n\n\n\n");
-			      exit(0);
+			      isFinish = true;
+			      isShip = false;
 			  }
-			}else screen.draw(&ship, isFlipShip);
+			}else if (!isAftermath) screen.draw(&ship, isFlipShip);
 			
 			// handle peluru
 			for (int i = 0; i < 100; i++){
@@ -209,8 +236,31 @@ int main() {
 					if (b[i] != NULL) screen.draw(b[i]);
 				}
 			}
-			
-			
+
+			if (isAftermath) {
+				speed += 1; // speed untuk gravity pull
+				isPlaneGrounded = plane.applyGravity(speed); /* Kasih efek gravity, return valuenya bakal 1 kalo object nya udah sampe "tanah" */				
+				screen.draw(&plane, isFlipPlane); /* Ini buat gambar objek2 yang udah mulai jatoh ke tanah */
+				usleep(FRAMERATE); // ini buat ngedelay kecepetan refresh frame biar gak terlalu cepet
+				if(isPlaneGrounded) { // periksa kalo semua objek udah sampe tanah, berarti game nya pindah ke state finish
+					isAftermath = false;
+					isFinish = true;
+
+					screen.beginBatch();
+					screen.draw(&plane, isFlipPlane); // ini buat gambar object2 yang udah berserakan di tanah
+					screen.endBatch();
+
+					gotoxy(10,10);
+					printf("Ship Wins!\n\n\n\n\n");
+					gotoxy(40,40);
+					printf("\n");
+				}
+			}
+
+			if (isFinish) {
+				exit(0);
+			}
+
 			screen.endBatch();
 			
 			while (accumulateTime<(SECONDS_PER_FRAME))
@@ -223,7 +273,7 @@ int main() {
 			previousTime = currentTime;
 		}
 	}
-	
+
 	return 0;	
 }
 

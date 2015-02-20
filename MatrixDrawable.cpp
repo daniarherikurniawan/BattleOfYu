@@ -201,3 +201,13 @@ void MatrixDrawable::fillColor(Pixel pixel) {
 		fillColor(tmp);
 	}
 }
+
+int MatrixDrawable::applyGravity(int velocity) {
+  mPositionY += velocity;
+  if (mPositionY > 250) {
+    mPositionY = 250;
+    return 1;
+  } else {
+    return 0;
+  }
+}

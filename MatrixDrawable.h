@@ -23,6 +23,8 @@ public:
   
   void fillColor(Pixel pixel);
   void fillPattern(Drawable *drawable);
+
+  int applyGravity(int velocity); // return = 1 jika objek sudah sampai "tanah"
 };
 
 #endif
