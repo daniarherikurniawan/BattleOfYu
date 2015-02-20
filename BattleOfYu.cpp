@@ -10,7 +10,7 @@
 #include "Peluru.h"
 
 
-const long long SECONDS_PER_FRAME = 1000/60;
+const long long SECONDS_PER_FRAME = 250/60;
 
 Point position(5,5);
 Color color(0,255,0,0);
@@ -21,7 +21,6 @@ Point endPosition(100,100);
 Color lineColor(255,0,0,0);
 Line line(beginPosition,endPosition,color);
 
-CompositeDrawable triangle("triangle.txt");
 CompositeDrawable c_plane("plane.txt");
 MatrixDrawable plane(&c_plane);
 
@@ -189,7 +188,7 @@ int main() {
 						
 						if (st.y > 330) b[i] = NULL;
 						
-						if (st.x > ship.getPosition().x  - 10 && st.x < ship.getPosition().x + 150 && st.y > 320){	// COLLISION
+						if (st.x > ship.getPosition().x  - 10 && st.x < ship.getPosition().x + 150 && st.y > 220){	// COLLISION
 						    meledak.setPosition(ship.getPosition().x,ship.getPosition().y);
 						    isShip = true;
 						    b[i] = NULL;
