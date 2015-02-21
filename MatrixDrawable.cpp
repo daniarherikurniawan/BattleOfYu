@@ -1,6 +1,15 @@
 #include "MatrixDrawable.h"
 
 MatrixDrawable::MatrixDrawable(Drawable *drawable) {
+  loadFromDrawable(drawable);
+}
+
+MatrixDrawable::MatrixDrawable(string inputFile) {
+  CompositeDrawable compositeDrawable(inputFile);
+  loadFromDrawable(&compositeDrawable);
+}
+
+void MatrixDrawable::loadFromDrawable(Drawable *drawable) {
   mWidth = drawable->getWidth();
   mHeight = drawable->getHeight();
   mPixelMatrix = new Color*[mHeight];
@@ -18,6 +27,24 @@ MatrixDrawable::MatrixDrawable(Drawable *drawable) {
       mPixelMatrix[y][x] = pixels[i].getColor();
     }
   }
+}
+
+MatrixDrawable::MatrixDrawable(MatrixDrawable matrix,Point startPoint,Point endPoint) {
+  mWidth = endPoint.x-startPoint.x+1;
+  mHeight = endPoint.y-startPoint.y+1;
+  mPixelMatrix = new Color*[mHeight];
+  for (int i=0;i<mHeight;i++)
+    mPixelMatrix[i] = new Color[mWidth];
+
+  mPositionY = 0;
+  mPositionX = 0;
+
+  for (int i=0;i<mHeight;i++)
+    for (int j=0;j<mWidth;j++) {
+      Point position(startPoint.x+j,startPoint.y+i);
+      mPixelMatrix[i][j] = matrix.getColor(position);
+    }
+
 }
 
 MatrixDrawable::MatrixDrawable(const MatrixDrawable& other) {
@@ -48,10 +75,10 @@ vector<Pixel> MatrixDrawable::getPixels() const{
       int blue = mPixelMatrix[i][j].blue;
       int alpha = mPixelMatrix[i][j].alpha;
       if (red!=0 || green !=0 || blue != 0) {
-	Point position(j+mPositionX,i+mPositionY);
-	Color color (red,green,blue,alpha);
-	Pixel pixel(position,color);
-	pixels.push_back(pixel);
+      	Point position(j+mPositionX,i+mPositionY);
+      	Color color (red,green,blue,alpha);
+      	Pixel pixel(position,color);
+      	pixels.push_back(pixel);
       }
     }
   }
@@ -92,14 +119,14 @@ void MatrixDrawable::fillWithFloodFill(Point position,MatrixDrawable pattern) {
     Point sourcePoint = sourcePointQueue.front();
     if (destPoint.y<mHeight && destPoint.x<mWidth && destPoint.y>=0 && destPoint.x>=0){
       if (!isVisited[destPoint.y][destPoint.x] && isEmpty(destPoint)){
-	mPixelMatrix[destPoint.y][destPoint.x] = pattern.getColor(sourcePoint);
-	for (int i=0;i<4;i++) {
-	  Point nextDestPoint(destPoint.x+xHelper[i],destPoint.y+yHelper[i]);
-	  Point nextSourcePoint(sourcePoint.x+xHelper[i],destPoint.y+yHelper[i]);
-	  sourcePointQueue.push(nextSourcePoint);
-	  destPointQueue.push(nextDestPoint);
-	}
-	isVisited[destPoint.y][destPoint.x] = true;
+	       mPixelMatrix[destPoint.y][destPoint.x] = pattern.getColor(sourcePoint);
+      	for (int i=0;i<4;i++) {
+      	  Point nextDestPoint(destPoint.x+xHelper[i],destPoint.y+yHelper[i]);
+      	  Point nextSourcePoint(sourcePoint.x+xHelper[i],destPoint.y+yHelper[i]);
+      	  sourcePointQueue.push(nextSourcePoint);
+      	  destPointQueue.push(nextDestPoint);
+	       }
+      isVisited[destPoint.y][destPoint.x] = true;
       }
     }
     
@@ -200,6 +227,23 @@ void MatrixDrawable::fillColor(Pixel pixel) {
 		Pixel tmp(pos, color);
 		fillColor(tmp);
 	}
+}
+
+vector<MatrixDrawable> MatrixDrawable::split(int horizontal,int vertical) const {
+  int childWidth = mWidth / vertical;
+  int childHeight = mHeight / horizontal;
+  vector<MatrixDrawable> childrenMatrixDrawables;
+  for (int i=0;i<vertical;i++) {
+    for (int j=0;j<horizontal;j++) {
+      Point startPoint(i*childWidth,j*childHeight);
+      Point endPoint((i+1)*childWidth-1,(j+1)*childHeight-1);
+      MatrixDrawable child(*this,startPoint,endPoint);
+      child.setPosition(startPoint.x+mPositionX,startPoint.y+mPositionY);
+      childrenMatrixDrawables.push_back(child);
+    }
+  }
+
+  return childrenMatrixDrawables;
 }
 
 int MatrixDrawable::applyGravity(int velocity) {

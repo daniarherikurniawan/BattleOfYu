@@ -4,6 +4,8 @@
 #include <vector>
 #include <cstdio>
 #include "Drawable.h"
+#include "CompositeDrawable.h"
+#include <string>
 #include <queue>
 
 class MatrixDrawable : public Drawable{
@@ -11,8 +13,11 @@ private:
   Color **mPixelMatrix;
   bool isEmpty(Point position) const;
   bool isBlank(int x, int y);
+  void loadFromDrawable(Drawable *drawable);
 public:
   MatrixDrawable(Drawable *drawable);
+  MatrixDrawable(string inputFile);
+  MatrixDrawable(MatrixDrawable matrix,Point startPoint,Point endPoint);
   MatrixDrawable(const MatrixDrawable& other);
   ~MatrixDrawable();
   vector<Pixel> getPixels() const;
@@ -21,6 +26,8 @@ public:
   void fillWithFloodFill(Point position,MatrixDrawable pattern);
   Color getColor(Point position) const;
   
+  vector<MatrixDrawable> split(int horizontal,int vertical)const;
+
   void fillColor(Pixel pixel);
   void fillPattern(Drawable *drawable);
 
