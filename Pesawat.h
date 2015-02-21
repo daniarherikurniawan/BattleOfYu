@@ -24,6 +24,8 @@ public:
 	int getTopMostY() const;
 	vector<Pixel> getPixels() const;
 	bool isExploded();
+	void translate(int dx,int dy);
+	void rotate(int angle,int x0,int y0);
 };
 
 #endif
