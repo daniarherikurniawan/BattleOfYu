@@ -19,6 +19,7 @@ public:
   MatrixDrawable(string inputFile);
   MatrixDrawable(MatrixDrawable matrix,Point startPoint,Point endPoint);
   MatrixDrawable(const MatrixDrawable& other);
+  MatrixDrawable();
   ~MatrixDrawable();
   vector<Pixel> getPixels() const;
   int getLeftMostX() const;
@@ -30,8 +31,10 @@ public:
 
   void fillColor(Pixel pixel);
   void fillPattern(Drawable *drawable);
-
+	
   int applyGravity(int velocity); // return = 1 jika objek sudah sampai "tanah"
+	void translate(int dx,int dy);
+  void rotate(int angle,int x0,int y0);
 };
 
 #endif

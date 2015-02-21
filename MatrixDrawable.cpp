@@ -1,5 +1,9 @@
 #include "MatrixDrawable.h"
 
+MatrixDrawable::MatrixDrawable() {
+  
+}
+
 MatrixDrawable::MatrixDrawable(Drawable *drawable) {
   loadFromDrawable(drawable);
 }
@@ -254,4 +258,12 @@ int MatrixDrawable::applyGravity(int velocity) {
   } else {
     return 0;
   }
+}
+
+void MatrixDrawable::translate(int dx,int dy){
+	printf("MatrixDrawable::translate not supported\n");
+}
+
+void MatrixDrawable::rotate(int angle,int x0,int y0){
+	printf("MatrixDrawable::rotate not supported\n");
 }
