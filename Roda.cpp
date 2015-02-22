@@ -30,6 +30,7 @@ void Roda::setCenter(Point mid) {
 void Roda::bounce() {
 	Screen screen;
 	bool finish = false;
+	bool rolling = false;
 	int velocity = -20;
 	int speed_reducer = 2;
 	int limit = -20;
@@ -39,7 +40,7 @@ void Roda::bounce() {
 	do {
 		screen.beginBatch();
 
-		if(!finish) {
+		if(!finish && !rolling) {
 			center.y += velocity;
 			x_counter++;
 			if(x_counter == 5) {
@@ -56,7 +57,18 @@ void Roda::bounce() {
 			velocity = limit;
 			center.y = center_y;
 			if(limit == 0) {
+				rolling = true;
+				x_counter = 0;
+			}
+		}
+
+		if(rolling) {
+			x_counter++;
+			center.x++;
+			if(x_counter == 50) {
+				rolling = false;
 				finish = true;
+				x_counter = 0;
 			}
 		}
 
@@ -107,4 +119,13 @@ void Roda::setColor(Color c) {
 
 Color Roda::getColor() const {
 	return color;
+}
+
+void Roda::translate(int dx, int dy) {
+	center.x += dx;
+	center.y += dy;
+};
+
+void Roda::rotate(int angle, int x0, int y0) {
+	//gak usah ngapa-ngapain, roda diputer2 sama aja
 }

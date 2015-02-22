@@ -25,6 +25,8 @@ public:
 	int getTopMostY() const;
 	void setColor(Color c) ;
 	Color getColor() const;
+	void translate(int dx, int dy);
+	void rotate(int angle, int x0, int y0);
 };
 
 #endif
