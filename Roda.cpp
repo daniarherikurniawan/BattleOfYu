@@ -8,6 +8,12 @@ Roda::Roda() {
 	color.green = 133;
 	color.blue = 244;
 	color.alpha = 0;
+	finish = false;
+	rolling = false;
+	velocity = -20;
+	speed_reducer = 2;
+	limit = -20;
+	x_counter = 0;
 }
 
 int Roda::getRadius() const {
@@ -27,20 +33,10 @@ void Roda::setCenter(Point mid) {
 	center.y = mid.y;
 }
 
-void Roda::bounce() {
-	Screen screen;
-	bool finish = false;
-	bool rolling = false;
-	int velocity = -20;
-	int speed_reducer = 2;
-	int limit = -20;
-	int x_counter = 0;
-	int center_y = center.y;
+bool Roda::bounce() {
 
-	do {
-		screen.beginBatch();
-
-		if(!finish && !rolling) {
+	if(!finish) {
+		if(!rolling) {
 			center.y += velocity;
 			x_counter++;
 			if(x_counter == 5) {
@@ -49,13 +45,10 @@ void Roda::bounce() {
 			}
 			velocity++;
 		}
-
-		screen.draw(this);
 		
 		if(velocity > limit * -1) {
 			limit += speed_reducer;
 			velocity = limit;
-			center.y = center_y;
 			if(limit == 0) {
 				rolling = true;
 				x_counter = 0;
@@ -71,11 +64,11 @@ void Roda::bounce() {
 				x_counter = 0;
 			}
 		}
-
 		usleep(10000);
-
-		screen.endBatch();
-	} while(!finish);
+		return true;
+	} else { // if (finish)
+		return false;
+	}
 }
 
 vector<Pixel> Roda::getPixels() const {

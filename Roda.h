@@ -13,13 +13,20 @@ private:
 	Point center;
 	Color color;
 
+	bool finish;
+	bool rolling;
+	int velocity;
+	int speed_reducer;
+	int limit;
+	int x_counter;
+
 public:
 	Roda();
 	int getRadius() const;
 	void setRadius(int r);
 	Point getCenter() const;
 	void setCenter(Point mid);
-	void bounce();
+	bool bounce(); //return true jika masih mantul, false jika sudah berhenti
 	vector<Pixel> getPixels() const;
 	int getLeftMostX() const;
 	int getTopMostY() const;

@@ -11,8 +11,16 @@ int main() {
 	Screen screen;
 	roda.setRadius(15);
 	roda.setCenter(Point(150,300));
+	bool bounce = true;
+	
+	do {
+		screen.beginBatch();
 
-	roda.bounce();
+		bounce = roda.bounce();
+		screen.draw(&roda);
+		
+		screen.endBatch();
+	} while (bounce);
 
 	return 0;
 }
