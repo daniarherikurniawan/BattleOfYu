@@ -3,6 +3,16 @@
 CompositeDrawable::CompositeDrawable() {
 }
 
+int CompositeDrawable::applyGravity(int velocity) {
+  mPositionY += velocity;
+  if (mPositionY > 490) {
+    mPositionY = 490;
+    return 1;
+  } else {
+    return 0;
+  }
+}
+
 CompositeDrawable::CompositeDrawable(string fileName) {
 	ifstream inputStream;
 	inputStream.open(fileName.c_str());

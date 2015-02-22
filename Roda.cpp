@@ -33,6 +33,22 @@ void Roda::setCenter(Point mid) {
 	center.y = mid.y;
 }
 
+void Roda::moveBy(int x, int y){
+	center.x += x;
+	center.y += y;
+}
+
+int Roda::applyGravity(int velocity) {
+  center.y += velocity;
+  if (center.y > 490) {
+    center.y = 490;
+    return 1;
+  } else {
+    return 0;
+  }
+	
+}
+
 bool Roda::bounce() {
 
 	if(!finish) {
@@ -64,7 +80,7 @@ bool Roda::bounce() {
 				x_counter = 0;
 			}
 		}
-		usleep(10000);
+		//usleep(10000);
 		return true;
 	} else { // if (finish)
 		return false;

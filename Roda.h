@@ -34,6 +34,8 @@ public:
 	Color getColor() const;
 	void translate(int dx, int dy);
 	void rotate(int angle, int x0, int y0);
+	int applyGravity(int velocity);
+	void moveBy(int x, int y);
 };
 
 #endif

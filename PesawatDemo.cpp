@@ -11,7 +11,6 @@ void handleInput() {
 		if (Keyboard::getKeyDownCode() == Keyboard::KEY_D){
 			Point explosionCenter(plane.getWidth()/2,plane.getHeight()/2);
 
-
 			//Ini harus dipanggil sebelum meledak
 			plane.startExplode(explosionCenter);		
 		}

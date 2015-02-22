@@ -3,9 +3,12 @@
 #include "Drawable.h"
 #include "MatrixDrawable.h"
 #include "Pixel.h"
+#include "Roda.h"
 #include <vector>
 #include <cmath>
 #include <cstdio>
+
+
 
 class Pesawat : public Drawable {
 private:
@@ -26,6 +29,8 @@ public:
 	bool isExploded();
 	void translate(int dx,int dy);
 	void rotate(int angle,int x0,int y0);
+	//Roda roda;
+	
 };
 
 #endif

@@ -9,6 +9,9 @@ Pesawat::Pesawat() : mBody("plane.txt") {
 
 	mWidth = mBody.getWidth();
 	mHeight = mBody.getHeight();
+
+	//roda.setRadius(10);
+	//roda.setCenter(Point(150,300));
 }
 
 void Pesawat::startExplode(Point centerPoint) {
@@ -64,6 +67,10 @@ vector<Pixel> Pesawat::getPixels() const {
 		Point endPosition(initialPosition.x+mPositionX,initialPosition.y+mPositionY);
 		pixels[i].setPosition(endPosition);
 	}
+
+	//vector<Pixel> rodPixel = roda.getPixels();
+	//pixels.insert(pixels.end(),rodPixel.begin(),rodPixel.end());
+	
 	return pixels;
 }
 

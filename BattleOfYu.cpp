@@ -9,6 +9,8 @@
 #include "Keyboard.h"
 #include "Peluru.h"
 #include "Roda.h"
+#include "Pesawat.h"
+#include "Propeller.hpp"
 #include <unistd.h>
 
 
@@ -24,15 +26,20 @@ Point endPosition(100,100);
 Color lineColor(255,0,0,0);
 Line line(beginPosition,endPosition,color);
 
-CompositeDrawable c_plane("plane.txt");
-MatrixDrawable plane(&c_plane);
-
 CompositeDrawable c_ship("ship.txt");
 MatrixDrawable ship(&c_ship);
 
 CompositeDrawable meledak("explosion.txt");
 CompositeDrawable bird("bird.txt");
 CompositeDrawable fish("fish.txt");
+CompositeDrawable parasut("parasut.txt");
+//MatrixDrawable parasut(&c_parasut);
+
+Pesawat plane;
+Roda roda1;
+Roda roda2;
+
+Propeller propeller("propeller.txt");
 
 
 bool isPlane = false;
@@ -50,6 +57,7 @@ bool isAftermath = false;
 
 // state di aftermath
 bool isPlaneGrounded = false;
+bool isBanSelesai = false;
 
 BulletFactory bf;
 Bullet *b[100]; // = bf.create(BulletFactory::LASER);
@@ -76,12 +84,32 @@ void handleInput() {
 		}else if (Keyboard::getKeyDownCode() == Keyboard::KEY_A && !isPlane && !isShip){
 			isFlipShip = true;
 			ship.moveBy(-2,0);
+			
 		}else if (Keyboard::getKeyDownCode() == Keyboard::KEY_L && !isPlane && !isShip){
+			if (!isFlipPlane){
+				propeller.moveBy(-90,0);
+				roda1.moveBy(20,0);
+				roda2.moveBy(20,0);
+			}
 			isFlipPlane = true;
 			plane.moveBy(2,0);
+			propeller.moveBy(2,0);
+			roda1.moveBy(2,0);
+			roda2.moveBy(2,0);
+			parasut.moveBy(2,0);
+			
 		}else if (Keyboard::getKeyDownCode() == Keyboard::KEY_J && !isPlane && !isShip){
+			if (isFlipPlane){
+				propeller.moveBy(90,0);
+				roda1.moveBy(-20,0);
+				roda2.moveBy(-20,0);
+			}			
 			isFlipPlane = false;
 			plane.moveBy(-2,0);
+			propeller.moveBy(-2,0);
+			roda1.moveBy(-2,0);
+			roda2.moveBy(-2,0);
+			parasut.moveBy(-2,0);
 		}else if (Keyboard::getKeyDownCode() == Keyboard::KEY_W)
 			exit(0);
 		else if (Keyboard::getKeyDownCode() == Keyboard::KEY_S && !isPlane && !isShip){
@@ -117,14 +145,20 @@ int main() {
 	Point f_pos(50,20);
 	Color  f_col(255,255,255,255);
 	Pixel f_plane(f_pos, f_col);
-	
+	propeller.setDrawPosition(145,30);
 	
 	bird.setPosition(50,20);
 	fish.setPosition(50,20);
-	
-	plane.setPosition(200,10);
-	plane.fillColor(f_plane);
-	plane.fillPattern(&bird);
+
+	roda1.setRadius(10);
+	roda1.setCenter(Point(40,50));
+
+	roda2.setRadius(10);
+	roda2.setCenter(Point(120,50));
+	parasut.setPosition(50,10);
+	//plane.setPosition(200,10);
+	//plane.fillColor(f_plane);
+	//plane.fillPattern(&bird);
 	
 	ship.setPosition(10,250);
 	
@@ -143,7 +177,9 @@ int main() {
 
 	int ii = 0;
 
-	int speed = 0;
+	float speed = 0;
+	float initialPercentage = 0;
+
 	
 	/* Game Clock */
 	while (true) {
@@ -155,18 +191,43 @@ int main() {
 			
 			
 			if (isPlane){
-			  planeEx += 0.05f;
-			  meledak.setPosition(meledak.getPosition().x - 2,meledak.getPosition().y - 2);
-						    
-			  screen.draw(&meledak, planeEx);
-			  
-			  if (planeEx > 2){
+			  //planeEx += 0.05f;
+			  //meledak.setPosition(meledak.getPosition().x - 2,meledak.getPosition().y - 2);
 
-			      screen.beginBatch();
-			      screen.endBatch();
+			
+	
+			    initialPercentage += 0.07;
+			plane.explode(initialPercentage);
+				speed += 0.1f;
+
+			propeller.applyGravity((int)speed);
+
+			parasut.applyGravity((int)speed);
+			screen.draw(&parasut);
+
+			if (!isPlaneGrounded){
+				isPlaneGrounded = roda1.applyGravity((int)speed);
+				roda2.applyGravity((int)speed);
+			}else{
+				propeller.setState(0);
+				isBanSelesai = !roda1.bounce();
+				roda2.bounce();
+			}
+
+			usleep(FRAMERATE/4);
+			  //screen.draw(&meledak, planeEx);
+			  
+			  if (isBanSelesai){
+
+			      //screen.beginBatch();
+			      //screen.endBatch();
 
 			  	  isPlane = false;
-			      isAftermath = true;
+			      //isAftermath = true;
+
+				gotoxy(1, 10);
+			      printf("\t\tSHIP WIN!\n\n\n\n\n\n\n\n\n\n");
+			      isFinish = true;
 
 				  /* TODO:
 			         - Animasi pesawat pecah
@@ -184,8 +245,15 @@ int main() {
 			      // exit(0);
 
 			  }
-			}else	screen.draw(&plane, isFlipPlane);
+			}
+
+			screen.draw(&plane, isFlipPlane);
+			screen.draw(&roda1);
+			screen.draw(&roda2);
 			
+
+			propeller.draw(&screen);
+
 			if (isShip){
 			  shipEx += 0.05f;
 			  
@@ -200,7 +268,7 @@ int main() {
 			      isFinish = true;
 			      isShip = false;
 			  }
-			}else if (!isAftermath) screen.draw(&ship, isFlipShip);
+			}else if (!isPlane) screen.draw(&ship, isFlipShip);
 			
 			// handle peluru
 			for (int i = 0; i < 100; i++){
@@ -232,6 +300,11 @@ int main() {
 						    meledak.setPosition(plane.getPosition().x,plane.getPosition().y);
 						    isPlane = true;
 						    b[i] = NULL;
+
+							Point explosionCenter(plane.getWidth()/2,plane.getHeight()/2);
+
+							//Ini harus dipanggil sebelum meledak
+							plane.startExplode(explosionCenter);
 						}
 					}
 					if (b[i] != NULL) screen.draw(b[i]);
@@ -239,11 +312,15 @@ int main() {
 			}
 
 			if (isAftermath) {
-				speed += 1; // speed untuk gravity pull
-				isPlaneGrounded = plane.applyGravity(speed); /* Kasih efek gravity, return valuenya bakal 1 kalo object nya udah sampe "tanah" */				
-				screen.draw(&plane, isFlipPlane); /* Ini buat gambar objek2 yang udah mulai jatoh ke tanah */
-				usleep(FRAMERATE); // ini buat ngedelay kecepetan refresh frame biar gak terlalu cepet
-				if(isPlaneGrounded) { // periksa kalo semua objek udah sampe tanah, berarti game nya pindah ke state finish
+				
+			//	speed += 1; // speed untuk gravity pull
+			//	isPlaneGrounded = plane.applyGravity(speed); /* Kasih efek gravity, return valuenya bakal 1 kalo object nya udah sampe "tanah" */				
+			//	screen.draw(&plane, isFlipPlane); /* Ini buat gambar objek2 yang udah mulai jatoh ke tanah */
+			//	usleep(FRAMERATE); // ini buat ngedelay kecepetan refresh frame biar gak terlalu cepet
+				initialPercentage += 0.01;
+				plane.explode(initialPercentage);
+
+				if(initialPercentage == 1) { // periksa kalo semua objek udah sampe tanah, berarti game nya pindah ke state finish
 					isAftermath = false;
 					isFinish = true;
 
