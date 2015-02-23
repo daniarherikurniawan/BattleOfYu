@@ -41,6 +41,7 @@ void Roda::moveBy(int x, int y){
 int Roda::applyGravity(int velocity) {
   center.y += velocity;
   if (center.y > 490) {
+	sub_center.y = 490;
     center.y = 490;
     return 1;
   } else {
@@ -63,6 +64,7 @@ bool Roda::bounce() {
 		}
 		
 		if(velocity > limit * -1) {
+			center.y = sub_center.y;
 			limit += speed_reducer;
 			velocity = limit;
 			if(limit == 0) {

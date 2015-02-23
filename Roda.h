@@ -10,6 +10,7 @@
 class Roda : public Drawable{
 private:
 	int radius;
+	Point sub_center;
 	Point center;
 	Color color;
 
