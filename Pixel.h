@@ -10,9 +10,6 @@ struct Point {
 	int y;
 	Point();
 	Point(int x,int y);
-	void translate(int dx,int dy){
-		x += dx; y += dy;
-	}
 	void rotate(int degree){
 		double rad = 2.0*PI*degree/360.0;
 		double _x = x*cos(rad) - y*sin(rad);
@@ -48,7 +45,6 @@ public :
 	Point getPosition();
 	void setPosition(Point position);
 	Color getColor();
-	void translate(int dx,int dy);
 	void rotate(int angle);
 	void rotate(int angle,int x0,int y0);
 };

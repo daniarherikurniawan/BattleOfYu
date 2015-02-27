@@ -2,11 +2,7 @@
 
 struct Point;
 struct Color;
-void Pixel::translate(int dx,int dy){
-	Point p = this->getPosition();
-	p.translate(dx,dy);
-	this->setPosition(p);
-}
+
 void Pixel::rotate(int angle){
 	Point p = this->getPosition();
 	p.rotate(angle);
@@ -31,6 +27,7 @@ Point Pixel:: getPosition() {
 void Pixel::setPosition(Point position) {
 	mPosition = position;
 }
+
 Color Pixel::getColor() {
 	return mColor;
 }
