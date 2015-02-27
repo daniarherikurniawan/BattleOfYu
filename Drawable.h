@@ -17,10 +17,8 @@ public:
 	int getHeight() const;
 	void setPosition(int positionX,int positionY);
 	void moveBy(int offsetX,int offsetY);
-	Point getPosition() const;
-	
-	virtual void translate(int dx,int dy) = 0;
 	virtual void rotate(int angle,int x0,int y0) = 0;
+	Point getPosition() const;
 };
 
 #endif

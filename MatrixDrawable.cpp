@@ -120,33 +120,36 @@ void MatrixDrawable::fillWithFloodFill(Point position,MatrixDrawable pattern) {
   
   while (!destPointQueue.empty()) {
     Point destPoint = destPointQueue.front();
+    int destX = destPoint.x;
+    int destY = destPoint.y;
     Point sourcePoint = sourcePointQueue.front();
-    if (destPoint.y<mHeight && destPoint.x<mWidth && destPoint.y>=0 && destPoint.x>=0){
-      if (!isVisited[destPoint.y][destPoint.x] && isEmpty(destPoint)){
-	       mPixelMatrix[destPoint.y][destPoint.x] = pattern.getColor(sourcePoint);
-      	for (int i=0;i<4;i++) {
-      	  Point nextDestPoint(destPoint.x+xHelper[i],destPoint.y+yHelper[i]);
-      	  Point nextSourcePoint(sourcePoint.x+xHelper[i],destPoint.y+yHelper[i]);
-      	  sourcePointQueue.push(nextSourcePoint);
-      	  destPointQueue.push(nextDestPoint);
-	       }
-      isVisited[destPoint.y][destPoint.x] = true;
+
+    if (destY<mHeight && destY>=0 && destX<mWidth && destX>=0){
+
+      if (!isVisited[destY][destX] && isBlank(destX,destY)){
+
+          mPixelMatrix[destY][destX] = pattern.getColor(sourcePoint);
+
+          for (int i=0;i<4;i++) {
+        	  Point nextDestPoint(destPoint.x+xHelper[i],destPoint.y+yHelper[i]);
+        	  Point nextSourcePoint(sourcePoint.x+xHelper[i],destPoint.y+yHelper[i]);
+        	  sourcePointQueue.push(nextSourcePoint);
+        	  destPointQueue.push(nextDestPoint);
+	         }
+        isVisited[destPoint.y][destPoint.x] = true;
       }
+
     }
     
     sourcePointQueue.pop();
     destPointQueue.pop();
   }
+
   for (int i=0;i<mHeight;i++){
     delete[] isVisited[i];
   }
+  
   delete[] isVisited;
-}
-
-bool MatrixDrawable::isEmpty(Point position) const{
-  int x = position.x;
-  int y = position.y;
-  return !(mPixelMatrix[y][x].red || mPixelMatrix[y][x].green ||mPixelMatrix[y][x].blue);
 }
 
 Color MatrixDrawable::getColor(Point position) const{
@@ -258,10 +261,6 @@ int MatrixDrawable::applyGravity(int velocity) {
   } else {
     return 0;
   }
-}
-
-void MatrixDrawable::translate(int dx,int dy){
-	printf("MatrixDrawable::translate not supported\n");
 }
 
 void MatrixDrawable::rotate(int angle,int x0,int y0){

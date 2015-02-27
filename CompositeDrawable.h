@@ -22,7 +22,6 @@ public :
 	int getLeftMostX() const;
 	int getTopMostY() const;
 	int applyGravity(int velocity);
-	void translate(int dx,int dy);
 	void rotate(int angle,int x0,int y0);
 };
 

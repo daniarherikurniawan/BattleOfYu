@@ -1,5 +1,5 @@
 build:
-	g++ -o BattleOfYu BattleOfYu.cpp Pixel.cpp Screen.cpp Line.cpp CompositeDrawable.cpp Util.cpp Keyboard.cpp Peluru.cpp Bitmap.cpp MatrixDrawable.cpp Drawable.cpp Pesawat.cpp Roda.cpp -lrt
+	g++ -o PixelDemo PixelDemo.cpp Pixel.cpp Screen.cpp Line.cpp CompositeDrawable.cpp Util.cpp Keyboard.cpp MatrixDrawable.cpp Drawable.cpp -lrt
 
 run: BattleOfYu
 	./BattleOfYu
