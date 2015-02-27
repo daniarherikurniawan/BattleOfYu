@@ -21,7 +21,6 @@ public :
 	~CompositeDrawable();
 	int getLeftMostX() const;
 	int getTopMostY() const;
-	int applyGravity(int velocity);
 	void rotate(int angle,int x0,int y0);
 };
 
