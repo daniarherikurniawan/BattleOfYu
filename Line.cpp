@@ -51,11 +51,6 @@ int Line::getTopMostY() const{
   return topY + mPositionY;
 }
 
-void Line::translate(int dx,int dy){
-	mBeginPoint.translate(dx,dy);
-	mEndPoint.translate(dx,dy);
-}
-
 void Line::rotate(int angle,int x0,int y0){
 	mBeginPoint.rotate(angle,x0,y0);
 	mEndPoint.rotate(angle,x0,y0);
