@@ -86,10 +86,6 @@ bool Pesawat::isExploded() {
 	return mIsExploded;
 }
 
-void Pesawat::translate(int dx,int dy) {
-	return;
-}
-
 void Pesawat::rotate(int angle,int x0,int y0) {
 	return;
 }
