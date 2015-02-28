@@ -16,10 +16,10 @@ Point endPosition(100,100);
 Color lineColor(255,0,0,0);
 Line line(beginPosition,endPosition,color);
 
-CompositeDrawable triangle("triangle.txt");
-CompositeDrawable plane("plane.txt");
-CompositeDrawable ship("ship.txt");
-CompositeDrawable explosion("explosion.txt");
+CompositeDrawable triangle("../triangle.txt");
+CompositeDrawable plane("../plane.txt");
+CompositeDrawable ship("../ship.txt");
+CompositeDrawable explosion("../explosion.txt");
 void handleInput() {
 	if (Keyboard::isKeyDown()) {
 		if (Keyboard::getKeyDownCode() == Keyboard::KEY_D){

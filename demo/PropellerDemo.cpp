@@ -16,10 +16,10 @@ Point endPosition(100,100);
 Color lineColor(255,0,0,0);
 Line line(beginPosition,endPosition,color);
 
-Propeller propeller("propeller.txt");
-CompositeDrawable explosion("explosion.txt");
-CompositeDrawable plane("plane.txt");
-CompositeDrawable ship("ship.txt");
+Propeller propeller("../propeller.txt");
+CompositeDrawable explosion("../explosion.txt");
+CompositeDrawable plane("../plane.txt");
+CompositeDrawable ship("../ship.txt");
 
 void handleInput() {
 	if (Keyboard::isKeyDown()) {
