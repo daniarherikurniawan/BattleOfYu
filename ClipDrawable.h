@@ -4,18 +4,28 @@
 #include "Drawable.h"
 #include "Line.h"
 #include "Pixel.h"
+#include "WorldMap.h"
+#include "Rectangle.h"
 #include <vector>
+#include <iostream>
+using namespace std;
 
-class ClipDrawable : public Drawable {
+class ClipDrawable : public Drawable{
 private:
-	vector<Line> mLines;
+	Point mWindowPosition;
 	int mWindowWidth,mWindowHeight;
-	
+	WorldMap mWorldMap;
+	Line scaleLineToView(Line line) const;
 public:
 	ClipDrawable(int width,int height,int windowWidth,int windowHeight);
-	virtual int getLeftMostX() const;
-	virtual int getTopMostY() const;
-	vector<Pixel> getPixels();
+	void setWorldMap(WorldMap worlMap);
+	void setWindowPosition(Point windowPosition);
+	void panBy(int displcamentX,int displacementY);
+	void zoomBy(float scale);
+	void rotate(int angle,int x0,int y0);
+	int getLeftMostX() const;
+	int getTopMostY() const;
+	vector<Pixel> getPixels() const;
 };
 
 

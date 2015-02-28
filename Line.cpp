@@ -3,8 +3,8 @@
 Line::Line(Point beginPoint,Point endPoint,Color color) {
 	mBeginPoint = beginPoint;
 	mEndPoint = endPoint;
-	mWidth = abs(mBeginPoint.x-mEndPoint.x + 1);
-	mHeight = abs(mBeginPoint.y-mEndPoint.y + 1);
+	mWidth = abs(mBeginPoint.x-mEndPoint.x)+1;
+	mHeight = abs(mBeginPoint.y-mEndPoint.y)+1;
 	mPositionX = 0;
 	mPositionY = 0;
 	mColor = color;

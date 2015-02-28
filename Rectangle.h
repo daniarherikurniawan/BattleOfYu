@@ -14,6 +14,7 @@ public:
 	int getLeftMostX() const;
 	int getTopMostY() const;
 	vector<Pixel> getPixels() const;
+	void rotate(int angle,int x0,int y0);
 };
 
 #endif

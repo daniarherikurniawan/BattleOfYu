@@ -22,3 +22,7 @@ int Drawable::getWidth() const{
 int Drawable::getHeight() const{
   return mHeight;
 }
+
+Drawable::~Drawable() {
+	
+}

@@ -19,7 +19,7 @@ vector<Pixel> Rectangle::getPixels() const{
 	Line line1(p1,p2,mColor);
 	Line line2(p2,p4,mColor);
 	Line line3(p3,p4,mColor);
-	Line line4(p1,p4,mColor);
+	Line line4(p1,p3,mColor);
 
 	vector<Pixel> linePixels1 = line1.getPixels();
 	vector<Pixel> linePixels2 = line2.getPixels();
@@ -42,4 +42,8 @@ int Rectangle::getLeftMostX() const {
 
 int Rectangle::getTopMostY() const {
 	return mPositionY;
+}
+
+void Rectangle::rotate(int angle,int x0,int y0) {
+	return;
 }

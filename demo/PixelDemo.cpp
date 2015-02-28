@@ -11,7 +11,7 @@ Point position(5,5);
 Color color(0,255,0,0);
 Pixel pixel(position,color);
 
-Point beginPosition(4,4);
+Point beginPosition(0,0);
 Point endPosition(100,100);
 Color lineColor(255,0,0,0);
 Line line(beginPosition,endPosition,color);
@@ -57,8 +57,7 @@ int main() {
 	while(true){
 		handleInput();
 		screen.beginBatch();
-		screen.draw(&ship,isflip);
-		screen.draw(&explosion,i);		
+		screen.draw(&line);	
 		screen.endBatch();
 		i+=0.001;
 	}
