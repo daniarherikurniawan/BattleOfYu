@@ -51,6 +51,10 @@ int Line::getTopMostY() const{
   return topY + mPositionY;
 }
 
+Color Line::getColor() const{
+	return mColor;
+}
+
 void Line::rotate(int angle,int x0,int y0){
 	mBeginPoint.rotate(angle,x0,y0);
 	mEndPoint.rotate(angle,x0,y0);
