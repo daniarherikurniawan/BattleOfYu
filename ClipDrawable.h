@@ -16,6 +16,7 @@ private:
 	int mWindowWidth,mWindowHeight;
 	WorldMap mWorldMap;
 	Line scaleLineToView(Line line) const;
+	float mScale;
 public:
 	ClipDrawable(int width,int height,int windowWidth,int windowHeight);
 	void setWorldMap(WorldMap worlMap);

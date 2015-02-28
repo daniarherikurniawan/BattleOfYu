@@ -5,6 +5,7 @@ ClipDrawable::ClipDrawable(int width,int height,int windowWidth,int windowHeight
 	mHeight = height;
 	mWindowWidth = windowWidth;
 	mWindowHeight = windowHeight;
+	mScale = 1;
 }
 
 void ClipDrawable::setWorldMap(WorldMap worldMap) {
@@ -24,12 +25,13 @@ void ClipDrawable::zoomBy(float scale) {
 	int newWidth = mWindowWidth / scale;
 	int newHeight = mWindowHeight / scale;
 
-	mWindowPosition.x += ((mWindowWidth-newWidth)/2);
-	mWindowPosition.y += ((mWindowHeight-newHeight)/2);
+	if (newWidth>5 && newHeight>5) {
+		mWindowPosition.x += ((mWindowWidth-newWidth)/2);
+		mWindowPosition.y += ((mWindowHeight-newHeight)/2);
 
-
-	mWindowWidth =  newWidth;
-	mWindowHeight = newHeight;
+		mWindowWidth =  newWidth;
+		mWindowHeight = newHeight;
+	}
 }
 
 Line ClipDrawable::scaleLineToView(Line windowLine) const{
