@@ -19,3 +19,7 @@ build:
 
 plane:
 	g++ -o PlaneDemo plane_topview_demo.cpp Pixel.cpp Screen.cpp Line.cpp CompositeDrawable.cpp Util.cpp Keyboard.cpp MatrixDrawable.cpp Drawable.cpp -lrt
+
+scaller: Scaller.o
+	g++ Scaller.cpp -o Scaller
+	./Scaller
