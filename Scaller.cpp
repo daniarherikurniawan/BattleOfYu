@@ -11,7 +11,7 @@ using namespace std;
 
 int main() {
 	string fileinput;
-	int scale;
+	double scale;
 
 	ifstream input;
 	ofstream output;
