@@ -1,8 +1,8 @@
-#include "Pixel.h"
-#include "Screen.h"
-#include "Line.h"
-#include "CompositeDrawable.h"
-#include "Keyboard.h"
+#include "../Pixel.h"
+#include "../Screen.h"
+#include "../Line.h"
+#include "../CompositeDrawable.h"
+#include "../Keyboard.h"
 
 
 const long long SECONDS_PER_FRAME = 1000/60;
