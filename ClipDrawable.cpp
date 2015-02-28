@@ -13,12 +13,11 @@ vector<Pixel> ClipDrawable::getPixels() {
 	Point viewPortStart(mPositionX,mPositionY);
 	Point viewPortEnd(mPositionX+mWidth,mPositionY+mHeight);
 
-	
 
 	for (int i=0;i<mLines.size();i++) {
 		Line lineInView = CohenShutterlandAlgorithm::getLineInView(mLines[i],viewPortStart,viewPortEnd);
-		vector<Pixel> linePixels = linInView.getPixels();
-		pixels.insert(pixels.end(),linePixels.start(),linePixels.end());
+		vector<Pixel> linePixels = lineInView.getPixels();
+		pixels.insert(pixels.end(),linePixels.begin(),linePixels.end());
 	}
 
 	return pixels;
@@ -35,13 +34,13 @@ int ClipDrawable::getTopMostY() const{
 int CohenShutterlandAlgorithm::computeOutcode(Point point,Point viewPortStart,Point viewPortEnd) {
 	int outcode = INSIDE;
 	if (point.y<viewPortStart.y)
-		point |= TOP;
+		outcode |= TOP;
 	else if (point.y>viewPortEnd.y)
-		point |= BOTTOM;
+		outcode |= BOTTOM;
 	if (point.x<viewPortStart.x)
-		point |= LEFT;
+		outcode |= LEFT;
 	else if (point.x>viewPortEnd.x)
-		point |= RIGHT;
+		outcode |= RIGHT;
 	return outcode;
 }
 
@@ -55,13 +54,13 @@ Line CohenShutterlandAlgorithm::getLineInView(Line line,Point viewPortStart,Poin
 	Point point1(x0,y0);
 	Point point2(x1,y1);
 
-	int outcode1 = computeOutcode(point1,viwPortstart,viewPortEnd);
+	int outcode1 = computeOutcode(point1,viewPortStart,viewPortEnd);
 	int outcode2 = computeOutcode(point2,viewPortStart,viewPortEnd);
 
-	int outcodeOut = outcode1 ? outcode1 ? outcode2;
+	int outcodeOut = outcode1 ? outcode1 : outcode2;
 	if (! (outcode1|outcode2))
 		return line;
-	else (outcode1 & outcode2)
+	else if (outcode1 & outcode2)
 		return Line(Point(0,0),Point(0,0),Color(0,0,0,0));
 	else {
 		int x,y;
