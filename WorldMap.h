@@ -6,10 +6,15 @@
 #include <fstream>
 
 #include "Line.h"
+#include "Plane.h"
+#include "Ship.h"
 
 class WorldMap {
 private:
 	vector<Line> mLines; 
+	Plane plane;
+	Ship ship;
+	vector<Line> allLines;
 public:
 	WorldMap();
 	WorldMap(string inputFile);
