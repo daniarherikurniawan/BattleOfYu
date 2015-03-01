@@ -4,10 +4,11 @@
 #include "../CompositeDrawable.h"
 #include "../Keyboard.h"
 #include "../ClipDrawable.h"
+#include "../Util.h"
 
 const long long SECONDS_PER_FRAME = 1000/60;
 
-WorldMap worldMap("../pulau/peta.txt");
+WorldMap worldMap("../pulau/pulau1.txt");
 ClipDrawable clipDrawable(200,200,400,400);
 
 void handleInput() {
@@ -32,18 +33,30 @@ void handleInput() {
 int main() {
 
 	Screen screen;
-	
+
+	long long previousTime = (long long)Util::getCurrentTimeInMiliseconds();
 	long long accumulateTime = 0;
 
 	clipDrawable.setWorldMap(worldMap);
-	clipDrawable.setPosition(10,10);
+	clipDrawable.setPosition(150,0);
 	Keyboard::startListening();
 
 	while(true){
-		handleInput();
-		screen.beginBatch();
-		screen.draw(&clipDrawable);
-		screen.endBatch();
+		if (accumulateTime>SECONDS_PER_FRAME){
+			handleInput();
+			worldMap.setWindowPort(clipDrawable.getWindowPort());
+			screen.beginBatch();
+			screen.draw(&worldMap);
+			screen.draw(&clipDrawable);
+			screen.endBatch();
+			while (accumulateTime<(SECONDS_PER_FRAME))
+					accumulateTime -= (SECONDS_PER_FRAME);
+		}
+		else {
+			long long currentTime = (long long)Util::getCurrentTimeInMiliseconds();
+			accumulateTime += (currentTime - previousTime);
+			previousTime = currentTime;
+		}
 	}
 	
 	return 0;

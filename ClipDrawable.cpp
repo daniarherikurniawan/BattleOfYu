@@ -35,10 +35,11 @@ void ClipDrawable::zoomBy(float scale) {
 }
 
 Line ClipDrawable::scaleLineToView(Line windowLine) const{
-	int windowX0 = windowLine.getLeftMostX();
-	int windowY0 = windowLine.getTopMostY();
-	int windowX1 = windowX0 + windowLine.getWidth() -1;
-	int windowY1 = windowY0 + windowLine.getHeight() -1;
+	Point windowLinePosition = windowLine.getPosition();
+	int windowX0 = windowLine.getBeginPoint().x + windowLinePosition.x;
+	int windowY0 = windowLine.getBeginPoint().y + windowLinePosition.y;
+	int windowX1 = windowLine.getEndPoint().x + windowLinePosition.x;
+	int windowY1 = windowLine.getEndPoint().y + windowLinePosition.y;
 
 	int viewX0 = mPositionX + (windowX0 - mWindowPosition.x) * mWidth/mWindowWidth;
 	int viewY0 = mPositionY + (windowY0 - mWindowPosition.y) * mHeight/mWindowHeight;
@@ -102,12 +103,17 @@ int CohenShutterlandAlgorithm::computeOutcode(Point point,Point viewPortStart,Po
 	return outcode;
 }
 
+Rectangle ClipDrawable::getWindowPort() const{
+	return Rectangle(Point(mWindowPosition.x,mWindowPosition.y),mWindowWidth,mWindowHeight,Color(255,0,0,0));
+}
 
 Line CohenShutterlandAlgorithm::getLineInView(Line line,Point viewPortStart,Point viewPortEnd) {
-	int x0 = line.getLeftMostX();
-	int y0 = line.getTopMostY();
-	int x1 = x0 + line.getWidth() - 1;
-	int y1 = y0 + line.getHeight() - 1;
+	
+	Point linePosition = line.getPosition();
+	int x0 = line.getBeginPoint().x + linePosition.x;
+	int y0 = line.getBeginPoint().y + linePosition.y;
+	int x1 = line.getEndPoint().x + linePosition.x;
+	int y1 = line.getEndPoint().y + linePosition.y;
 
 	Point point1(x0,y0);
 	Point point2(x1,y1);

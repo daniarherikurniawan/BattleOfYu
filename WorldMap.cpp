@@ -1,13 +1,13 @@
 #include "WorldMap.h"
 
-WorldMap::WorldMap() {
+WorldMap::WorldMap() : mWindowPort(Point(0,0),100,100,Color(255,0,0,0)) {
 	Line line1(Point(-1,-1),Point(99,99),Color(255,0,0,0));
 	Line line2 (Point(25,0),Point(25,100),Color(255,0,0,0));
 	mLines.push_back(line1);
 	mLines.push_back(line2);
 }
 
-WorldMap::WorldMap(string inputFile) {
+WorldMap::WorldMap(string inputFile) : mWindowPort(Point(0,0),100,100,Color(255,0,0,0)){
 	ifstream inputStream;
 	inputStream.open(inputFile.c_str());
 	int numberOfComponent;
@@ -32,6 +32,34 @@ WorldMap::WorldMap(string inputFile) {
 	inputStream.close();
 }
 
+void WorldMap::setWindowPort(Rectangle windowPort){
+	mWindowPort = windowPort;
+}
+
 vector<Line> WorldMap::getLines() const{
 	return mLines;
+}
+
+
+vector<Pixel> WorldMap::getPixels() const {
+	vector<Pixel> pixels;
+	for (int i=0;i<mLines.size();i++) {
+		vector<Pixel> linePixels = mLines[i].getPixels();
+		pixels.insert(pixels.end(),linePixels.begin(),linePixels.end());
+	}
+	vector<Pixel> recPixel = mWindowPort.getPixels();
+	pixels.insert(pixels.end(),recPixel.begin(),recPixel.end());
+	return pixels;
+}
+
+void WorldMap::rotate(int angle,int x0,int y0) {
+	return;
+}
+
+int WorldMap::getLeftMostX() const{
+	return 0;
+}
+
+int WorldMap::getTopMostY() const{
+	return 0;
 }

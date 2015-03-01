@@ -63,3 +63,11 @@ void Line::rotate(int angle,int x0,int y0){
 	mPositionX = 0;
 	mPositionY = 0;
 }
+
+Point Line::getBeginPoint() {
+	return mBeginPoint;
+}
+
+Point Line::getEndPoint() {
+	return mEndPoint;
+}

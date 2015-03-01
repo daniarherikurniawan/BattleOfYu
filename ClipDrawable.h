@@ -27,6 +27,7 @@ public:
 	int getLeftMostX() const;
 	int getTopMostY() const;
 	vector<Pixel> getPixels() const;
+	Rectangle getWindowPort() const;
 };
 
 
