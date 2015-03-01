@@ -37,6 +37,15 @@ int main() {
 	long long previousTime = (long long)Util::getCurrentTimeInMiliseconds();
 	long long accumulateTime = 0;
 
+	bool isShipPositive = true;
+	bool isPlanePositive = true;
+
+	
+
+	worldMap.ship.moveBy(0,70);
+	worldMap.plane.moveBy(40,0);
+
+
 	clipDrawable.setWorldMap(worldMap);
 	clipDrawable.setPosition(135,160);
 	Keyboard::startListening();
@@ -45,6 +54,33 @@ int main() {
 		if (accumulateTime>SECONDS_PER_FRAME){
 			handleInput();
 			worldMap.setWindowPort(clipDrawable.getWindowPort());
+
+			if (isShipPositive){
+				worldMap.ship.moveBy(1,0);
+				if (worldMap.ship.x > 400){
+					isShipPositive = false;
+				}
+			}else{
+				worldMap.ship.moveBy(-1,0);
+				if (worldMap.ship.x < 10){
+					isShipPositive = true;
+				}
+			}
+
+			if (isPlanePositive){
+				worldMap.plane.moveBy(0,1);
+				if (worldMap.plane.y > 400){
+					isPlanePositive = false;
+				}
+			}else{
+				worldMap.plane.moveBy(0,-1);
+				if (worldMap.plane.y < 10){
+					isPlanePositive = true;
+				}
+			}
+
+			clipDrawable.setWorldMap(worldMap);
+
 			screen.beginBatch();
 			screen.draw(&worldMap);
 			screen.draw(&clipDrawable);

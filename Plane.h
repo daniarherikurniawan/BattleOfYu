@@ -11,10 +11,13 @@ class Plane {
 private:
 	vector<Line> mLines; 
 public:
+	int x;
+	int y;
 	Plane();
 	Plane(string inputFile);
 	vector<Line> getLines() const;
 	void readFromFile(string inputFile);
+	void moveBy(int x, int y);
 };
 
 #endif

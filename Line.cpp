@@ -71,3 +71,13 @@ Point Line::getBeginPoint() {
 Point Line::getEndPoint() {
 	return mEndPoint;
 }
+
+void Line::setBeginPoint(Point mBegin){
+	mBeginPoint = mBegin;
+}
+
+void Line::setEndPoint(Point mEnd){
+	mEndPoint = mEnd;
+}
+
+
