@@ -1,13 +1,15 @@
 #include "WorldMap.h"
 
 WorldMap::WorldMap() : mWindowPort(Point(0,0),100,100,Color(255,0,0,0)) {
-	Line line1(Point(-1,-1),Point(99,99),Color(255,0,0,0));
-	Line line2 (Point(25,0),Point(25,100),Color(255,0,0,0));
-	mLines.push_back(line1);
-	mLines.push_back(line2);
+	// Line line1(Point(-1,-1),Point(99,99),Color(255,0,0,0));
+	// Line line2 (Point(25,0),Point(25,100),Color(255,0,0,0));
+	// mLines.push_back(line1);
+	// mLines.push_back(line2);
 }
 
 WorldMap::WorldMap(string inputFile) : mWindowPort(Point(0,0),100,100,Color(255,0,0,0)){
+	plane.readFromFile("../plane_topview.txt");
+	ship.readFromFile("../battleship_topview.txt");
 	ifstream inputStream;
 	inputStream.open(inputFile.c_str());
 	int numberOfComponent;
@@ -37,7 +39,17 @@ void WorldMap::setWindowPort(Rectangle windowPort){
 }
 
 vector<Line> WorldMap::getLines() const{
-	return mLines;
+	vector<Line> temp;
+	for(int i = 0; i < mLines.size(); i++) {
+		temp.push_back(mLines[i]);
+	}
+	for(int i = 0; i < plane.getLines().size(); i++) {
+		temp.push_back(plane.getLines()[i]);
+	}
+	for(int i = 0; i < ship.getLines().size(); i++) {
+		temp.push_back(ship.getLines()[i]);
+	}
+	return temp;
 }
 
 
@@ -63,3 +75,4 @@ int WorldMap::getLeftMostX() const{
 int WorldMap::getTopMostY() const{
 	return 0;
 }
+

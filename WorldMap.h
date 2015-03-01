@@ -9,11 +9,16 @@
 #include "Drawable.h"
 #include "Pixel.h"
 #include "Rectangle.h"
+#include "Plane.h"
+#include "Ship.h"
 
 class WorldMap : public Drawable{
 private:
 	vector<Line> mLines; 
 	Rectangle mWindowPort;
+	Plane plane;
+	Ship ship;
+	vector<Line> allLines;
 public:
 	WorldMap();
 	WorldMap(string inputFile);
