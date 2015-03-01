@@ -1,5 +1,5 @@
-#include "Roda.h"
-#include "Screen.h"
+#include "../Roda.h"
+#include "../Screen.h"
 #include <unistd.h>
 
 void gotoxy(int x,int y){

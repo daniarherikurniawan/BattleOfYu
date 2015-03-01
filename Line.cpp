@@ -3,8 +3,8 @@
 Line::Line(Point beginPoint,Point endPoint,Color color) {
 	mBeginPoint = beginPoint;
 	mEndPoint = endPoint;
-	mWidth = abs(mBeginPoint.x-mEndPoint.x + 1);
-	mHeight = abs(mBeginPoint.y-mEndPoint.y + 1);
+	mWidth = abs(mBeginPoint.x-mEndPoint.x)+1;
+	mHeight = abs(mBeginPoint.y-mEndPoint.y)+1;
 	mPositionX = 0;
 	mPositionY = 0;
 	mColor = color;
@@ -49,6 +49,10 @@ int Line::getTopMostY() const{
   int y1 = mEndPoint.y;
   int topY = (y0<y1) ? y0 : y1;
   return topY + mPositionY;
+}
+
+Color Line::getColor() const{
+	return mColor;
 }
 
 void Line::rotate(int angle,int x0,int y0){

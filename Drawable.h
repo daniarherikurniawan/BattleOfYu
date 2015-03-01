@@ -9,7 +9,7 @@ protected:
 	int mWidth,mHeight;
 public:
 	Drawable(){}
-	virtual ~Drawable(){}
+	virtual ~Drawable();
 	virtual vector<Pixel> getPixels() const=0;
 	virtual int getLeftMostX() const =0;
 	virtual int getTopMostY() const =0;

@@ -1,7 +1,7 @@
-#include "Screen.h"
-#include "Pesawat.h"
-#include "Keyboard.h"
-#include "Util.h"
+#include "../Screen.h"
+#include "../Pesawat.h"
+#include "../Keyboard.h"
+#include "../Util.h"
 Pesawat plane;
 
 const long long SECONDS_PER_FRAME = 1000/60;

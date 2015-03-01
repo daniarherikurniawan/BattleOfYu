@@ -1,7 +1,7 @@
 #include "Pesawat.h"
 
-Pesawat::Pesawat() : mBody("plane.txt") {
-	CompositeDrawable bird("bird.txt");
+Pesawat::Pesawat() : mBody("../plane.txt") {
+	CompositeDrawable bird("../bird.txt");
 	MatrixDrawable birdMatrix(&bird);
 	Point floodFillPosition(mBody.getWidth()/2,mBody.getHeight()/2);
 	mBody.fillWithFloodFill(floodFillPosition,&birdMatrix);

@@ -17,6 +17,7 @@ public :
 	int getLeftMostX() const;
 	int getTopMostY() const;
 	void rotate(int angle,int x0,int y0);
+	Color getColor() const;
 };
 
 #endif
