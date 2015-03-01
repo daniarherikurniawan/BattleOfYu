@@ -38,7 +38,7 @@ int main() {
 	long long accumulateTime = 0;
 
 	clipDrawable.setWorldMap(worldMap);
-	clipDrawable.setPosition(320,220);
+	clipDrawable.setPosition(135,160);
 	Keyboard::startListening();
 
 	while(true){
