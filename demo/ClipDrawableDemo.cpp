@@ -8,7 +8,7 @@
 
 const long long SECONDS_PER_FRAME = 1000/60;
 
-WorldMap worldMap("../pulau/pulau1.txt");
+WorldMap worldMap("../pulau/peta.txt");
 ClipDrawable clipDrawable(150,150,150,150);
 
 void handleInput() {
@@ -38,7 +38,7 @@ int main() {
 	long long accumulateTime = 0;
 
 	clipDrawable.setWorldMap(worldMap);
-	clipDrawable.setPosition(600,200);
+	clipDrawable.setPosition(320,220);
 	Keyboard::startListening();
 
 	while(true){
