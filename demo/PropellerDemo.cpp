@@ -3,8 +3,8 @@
 #include "../Line.h"
 #include "../CompositeDrawable.h"
 #include "../Keyboard.h"
+#include "../Propeller.hpp"
 
-#include "Propeller.hpp"
 const long long SECONDS_PER_FRAME = 1000/60;
 bool isflip=false;
 Point position(5,5);

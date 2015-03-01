@@ -1,8 +1,8 @@
-#include "Pixel.h"
-#include "Screen.h"
-#include "Line.h"
-#include "CompositeDrawable.h"
-#include "Keyboard.h"
+#include "../Pixel.h"
+#include "../Screen.h"
+#include "../Line.h"
+#include "../CompositeDrawable.h"
+#include "../Keyboard.h"
 
 const long long SECONDS_PER_FRAME = 1000/60;
 bool isflip=false;
@@ -15,7 +15,7 @@ Point endPosition(100,100);
 Color lineColor(255,0,0,0);
 Line line(beginPosition,endPosition,color);
 
-CompositeDrawable plane ("plane_topview.txt");
+CompositeDrawable plane ("../plane_topview.txt");
 void handleInput() {
 	if (Keyboard::isKeyDown()) {
 		if (Keyboard::getKeyDownCode() == Keyboard::KEY_D){

@@ -7,8 +7,8 @@
 
 const long long SECONDS_PER_FRAME = 1000/60;
 
-WorldMap worldMap;
-ClipDrawable clipDrawable(300,300,100,100);
+WorldMap worldMap("../pulau/peta.txt");
+ClipDrawable clipDrawable(200,200,400,400);
 
 void handleInput() {
 	if (Keyboard::isKeyDown()) {
