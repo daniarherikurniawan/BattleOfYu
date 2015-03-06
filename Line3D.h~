@@ -1,18 +1,27 @@
 #ifndef LINE3D_H
 #define LINE3D_H
 
-struct Point3D {
-	double x;
-	double y;
-	double z;
-	Point3D(int x0, int y0, int z0) : x(x0), y(y0), z(z0) {} 
-	void translate (int x0, int y0, int z0) {x += x0; y+=y0; z+=z0;}
-};
+#include "Pixel.h"
+#include "Drawable.h"
 
 
-struct Line3D {
-	Point3D p1, p2;
-	Line3D(int x0, int y0, int z0, int x1, int y1, int z1) : p1(x0,y0,z0) , p2(x1,y1,z1) {}
-	void translate(int x0, int y0, int z0) {p1.translate(x0,y0,z0);p2.translate(x0,y0,z0);}
+
+class Line3D: public Drawable {
+private:
+	Point3D mBeginPoint,mEndPoint;
+	
+public:
+	Point3D getBeginPoint();
+	Point3D getEndPoint();
+	void setBeginPoint(Point3D value);
+	void setEndPoint(Point3D value);
+	Color mColor;
+	Line3D(Point3D beginPoint,Point3D endPoint,Color color);
+	Line3D(double x0, double y0, double z0, double x1, double y1, double z1);
+	void translate(double x0, double y0, double z0);
+	vector<Pixel> getPixels() const;
+	void rotate(int angle,int x,int y);
+	int getLeftMostX() const;
+	int getTopMostY() const;
 };
 #endif

@@ -30,5 +30,8 @@ testplane:
 testship:
 	g++ Ship.cpp WorldMap.cpp Pixel.cpp Screen.cpp Line.cpp CompositeDrawable.cpp Util.cpp Keyboard.cpp MatrixDrawable.cpp Drawable.cpp ClipDrawable.cpp Rectangle.cpp
 
+polygon3d:
+	g++ -o bin/polygon3d 
+	
 cubedemo:
-	g++ -o bin/cubedemo demo.CubeDemo.c Pixel.cpp Screen.cpp Line.cpp Drawable.cpp
+	g++ -o bin/cubedemo demo/CubeDemo.c Pixel.cpp Screen.cpp Line.cpp Drawable.cpp
