@@ -87,23 +87,14 @@ vector<Pixel> Bitmap::getPixels() const{
 }
 
 void Bitmap::translate(int dx,int dy){
-	Point p = this->getBeginPoint();
-	p.translate(dx,dy);
-	this->setBeginPoint(p);
-	
-	for(int i = 0; i < pixels.size(); i++){
-		pixels[i].translate(dx,dy);
-	}
+	this->getBeginPoint().x = this->getBeginPoint().x + dx;
+	this->getBeginPoint().y = this->getBeginPoint().y + dy;
 }
 
 void Bitmap::rotate(int angle,int x0,int y0){
 	Point p = this->getBeginPoint();
 	p.rotate(angle,x0,y0);
 	this->setBeginPoint(p);
-	
-	for(int i = 0; i < pixels.size(); i++){
-		pixels[i].rotate(angle,x0,y0);
-	}
 }
 
 Bitmap Bitmap::rotate(int angle) {
