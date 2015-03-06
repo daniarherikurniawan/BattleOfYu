@@ -3,12 +3,14 @@
 
 #include "Pixel.h"
 #include "Drawable.h"
+#include "Line.h"
 
 
 
 class Line3D: public Drawable {
 private:
 	Point3D mBeginPoint,mEndPoint;
+	Color mColor;
 	
 public:
 	Point3D getBeginPoint();
@@ -17,7 +19,11 @@ public:
 	void setBeginPoint(Point3D value);
 	void setEndPoint(Point3D value);
 	
-	Color mColor;
+	Line getLine2D();
+	//kedua fungsi ini harus dipanggil sebelum dan sesudah draw
+	void beforeDraw();
+	void afterDraw();
+	
 	Line3D(Point3D beginPoint,Point3D endPoint,Color color);
 	Line3D(double x0, double y0, double z0, double x1, double y1, double z1);
 	void translate(double x0, double y0, double z0);
@@ -25,5 +31,6 @@ public:
 	void rotate(int angle,int x,int y);
 	int getLeftMostX() const;
 	int getTopMostY() const;
+	
 };
 #endif

@@ -30,6 +30,11 @@ struct Point3D {
 	double z;
 	Point3D();
 	Point3D(double x,double y,double z);
+	void translate(double x0,double y0,double z0){
+		x += x0; y += y0; z += z0;
+	}
+	Point getPoint2D();
+	Point getPoint2D(Point3D center,Point3D cameraPosition,Point3D pan,double zoom);
 };
 
 struct Color {

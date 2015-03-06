@@ -34,5 +34,10 @@ polygon3d:
 	g++ -o bin/polygon3d demo/Polygon3DDemo.cpp Pixel.cpp Screen.cpp Line.cpp Drawable.cpp
 	
 cubedemo:
-	g++ -o bin/cubedemo demo/CubeDemo.cpp Pixel.cpp Screen.cpp Line.cpp Drawable.cpp Line3D.cpp
+	g++ -o bin/cubedemo demo/CubeDemo.cpp Pixel.cpp Screen.cpp Line.cpp Drawable.cpp CameraService.cpp Line3D.cpp Keyboard.cpp 
+
+
+	
+line3ddemo:
+	g++ -o bin/line3ddemo demo/Line3DDemo.cpp Pixel.cpp Screen.cpp Line.cpp Drawable.cpp Line3D.cpp
 

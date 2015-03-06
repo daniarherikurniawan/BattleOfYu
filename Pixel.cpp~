@@ -40,7 +40,41 @@ Point::Point(int x,int y) : x(x),y(y) {
 }
 
 Point3D::Point3D(): x(0),y(0),z(0){};
-Point3D::Point3D(): x(x),y(y),z(z){};
+Point3D::Point3D(double x,double y,double z): x(x),y(y),z(z){};
+
+Point Point3D::getPoint2D(Point3D centre,Point3D cameraPos,Point3D pan,double zoom){
+	double temp_x = x;
+	double temp_y = y;
+	double temp_z = z;
+	x = x + cameraPos.x;
+	y = y + cameraPos.y;
+	z = z + cameraPos.z;
+
+	Point3D new_point;
+	new_point.x = x*cos(pan.x) - z*sin(pan.x);
+	new_point.z = x*sin(pan.x) + z*cos(pan.x);
+	new_point.y = y*cos(pan.y) - new_point.z*sin(pan.y);
+
+	z = new_point.y*cos(pan.y) - new_point.z*sin(pan.y);
+	x = new_point.x*cos(pan.z) - new_point.y*sin(pan.z);
+	y = new_point.x*sin(pan.z) + new_point.y*cos(pan.z);
+
+	Point ret;
+	if (z > 0){
+    ret.x = x / z * zoom + centre.x;
+    ret.y = y / z * zoom + centre.y;
+  } 
+  x = temp_x; y = temp_y; z = temp_z;
+  return ret; 
+}
+
+Point Point3D::getPoint2D(){
+  Point3D pan(0,0,100);
+	Point3D cameraPosition(-10,0,0);
+	Point3D center(1024./2,768./2,0);
+	double zoom = 500;
+	return getPoint2D(center,cameraPosition,pan,zoom);
+}
 
 Color::Color() :red(0),green(0),blue(0) {
 
