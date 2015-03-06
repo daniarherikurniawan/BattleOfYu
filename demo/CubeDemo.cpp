@@ -55,10 +55,10 @@ int main () {
 
 Line* transform (Line3D* ln) {
 	Point first, last;
-	first.x = (ln->getBeginPoint()).x / ((ln->getEndPoint()).z*scale + 1);
-	first.y = (ln->getBeginPoint()).y / ((ln->getEndPoint()).z*scale + 1);
-	last.x = (ln->getBeginPoint()).x / ((ln->getEndPoint()).z*scale + 1);
-	last.y = (ln->getBeginPoint()).y / ((ln->getEndPoint()).z*scale + 1);
+	first.x = (ln->getBeginPoint()).x / ((ln->getBeginPoint()).z*scale + 1);
+	first.y = (ln->getBeginPoint()).y / ((ln->getBeginPoint()).z*scale + 1);
+	last.x = (ln->getEndPoint()).x / ((ln->getEndPoint()).z*scale + 1);
+	last.y = (ln->getEndPoint()).y / ((ln->getEndPoint()).z*scale + 1);
 	Color white(255,255,255,0);
 	Line* l = new Line(first,last,white);
 	return l;
