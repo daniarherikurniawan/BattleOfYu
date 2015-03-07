@@ -32,3 +32,6 @@ testship:
 
 cubedemo:
 	g++ -o bin/cubedemo demo/CubeDemo.c Pixel.cpp Screen.cpp Line.cpp Drawable.cpp
+
+colorpicker:
+	g++ colorpicker.cpp -o bin/colorpicker
