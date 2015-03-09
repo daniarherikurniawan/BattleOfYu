@@ -25,7 +25,7 @@ vector<Pixel> Line3D::getPixels() const{
 }
 
 //versi perspektif
-Line Line3D::getLine2D(){
+Line Line3D::getLine2D() const{
 	Point first, last;
 	//scalenya dihardcode dulu
 	double scale = 0.001;
@@ -70,11 +70,11 @@ void Line3D::rotate(int angle,int x0,int y0){
 	printf("line3d rotation not supported\n");
 }
 
-Point3D Line3D::getBeginPoint() {
+Point3D Line3D::getBeginPoint() const{
 	return mBeginPoint;
 }
 
-Point3D Line3D::getEndPoint() {
+Point3D Line3D::getEndPoint() const{
 	return mEndPoint;
 }
 

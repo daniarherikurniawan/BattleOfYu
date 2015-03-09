@@ -45,10 +45,12 @@ void Screen::drawPixel(Pixel pixel) {
 }
 
 void Screen::draw(Drawable *drawable) {
+	drawable->beforeDraw();
 	vector<Pixel> pixels = drawable->getPixels();
 	for (int i=0;i<pixels.size();i++) {
 		drawPixel(pixels[i]);
 	}
+	drawable->afterDraw();
 }
 
 Screen::~Screen() {

@@ -3,7 +3,8 @@
 #include <vector>
 #include "Line3D.h"
 #include "Drawable.h"
-
+#include "Polygon.h"
+#include <algorithm>
 using namespace std;
 
 class Polygon3D : public Drawable {
@@ -12,13 +13,25 @@ class Polygon3D : public Drawable {
 public:
 	Polygon3D();
 	Polygon3D(string filename);
+	Polygon3D(vector<Line3D>& lines);
+	
+	
+	//dua line ini harus dipanggil sebelum dan sesudah draw
+	void beforeDraw();
+	void afterDraw();
+	
+	int getSize() const;
+	
+	Polygon convertToPolygon2D() const;
 	void add(Line3D* line);
 	void clear();
 	vector<Pixel> getPixels() const;
 	~Polygon3D();
 	int getLeftMostX() const;
 	int getTopMostY() const;
-	void rotate(int angle,int x0,int y0);
+	
+	void translate(double dx,double dy);
+	void translate(double dx,double dy,double dz);
 };
 
 #endif

@@ -2,8 +2,12 @@
 
 Polygon3D::Polygon3D(){
 }
+Polygon3D::~Polygon3D(){
+	lines.clear();
+}
 
 Polygon3D::Polygon3D(string filename){
+/*
 	ifstream inputStream;
 	inputStream.open(fileName.c_str());
 	int numberOfComponent;
@@ -21,13 +25,12 @@ Polygon3D::Polygon3D(string filename){
 			inputStream>>x1>>y1>>x2>>y2>>red>>green>>blue;
 			Point beginPoint(x1,y1),endPoint(x2,y2);
 			Color color(red,green,blue,0);
-			this->add(new Line(beginPoint,endPoint,color));
 		} else {
 			printf("Unknown type of component in file %s: %c\n",fileName.c_str(),typeOfComponent);
 		}
 		numberOfComponent--;
 	}
-	inputStream.close();
+	inputStream.close();*/
 }
 
 void Polygon3D::add(Line3D* line){
@@ -39,12 +42,29 @@ void Polygon3D::clear(){
 }
 
 vector<Pixel> Polygon3D::getPixels() const{
-
+	
 }
 
 //TBD
-void rotate(int angle,int x0,int y0){
+void Polygon3D::rotate(int angle,int x0,int y0){
 	printf("Polygon3D doesn't support rotate");
 }
 
-#endif
+int Polygon3D::getLeftMostX() const {
+	int left_most_x = lines[0].getBeginPoint().x;
+	for(unsigned int i = 0; i < lines.size(); i++){
+		int x = min(lines[i].getLine2D().getBeginPoint().x,lines[i].getEndPoint().x);	
+		left_most_x = min(left_most_x,x);
+	}
+	return left_most_x;	
+}
+
+int Polygon3D::getTopMostY() const{
+	int lmy = lines[0].getBeginPoint().x;
+	for(unsigned int i = 0; i < lines.size(); i++){
+		int y = min(lines[i].getBeginPoint().y,lines[i].getEndPoint().y);
+		lmy = min(lmy,y);
+	}
+	return lmy;
+}
+

@@ -13,13 +13,13 @@ private:
 	Color mColor;
 	
 public:
-	Point3D getBeginPoint();
-	Point3D getEndPoint();
+	Point3D getBeginPoint() const;
+	Point3D getEndPoint() const;
 	Color getColor() const;
 	void setBeginPoint(Point3D value);
 	void setEndPoint(Point3D value);
 	
-	Line getLine2D();
+	Line getLine2D() const;
 	//kedua fungsi ini harus dipanggil sebelum dan sesudah draw
 	void beforeDraw();
 	void afterDraw();

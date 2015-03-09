@@ -40,12 +40,12 @@ Line Line3D::getLine2D(){
 
 void Line3D::beforeDraw(){
 	Point3D &cpos = CameraService::position;
-	this->translate(-cpos.x,-cpos.y,-cpos.z);
+	this->translate(-cpos.x,-cpos.y,cpos.z);
 }
 
 void Line3D::afterDraw(){
 	Point3D &cpos = CameraService::position;
-	this->translate(cpos.x,cpos.y,cpos.z);
+	this->translate(cpos.x,cpos.y,-cpos.z);
 }
 
 int Line3D::getLeftMostX() const{

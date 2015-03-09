@@ -9,7 +9,6 @@ Line::Line(Point beginPoint,Point endPoint,Color color) {
 	mPositionY = 0;
 	mColor = color;
 }
-
 vector<Pixel> Line::getPixels() const{
 	int x1 = mBeginPoint.x;
 	int x0 = mEndPoint.x;
@@ -64,11 +63,18 @@ void Line::rotate(int angle,int x0,int y0){
 	mPositionY = 0;
 }
 
-Point Line::getBeginPoint() {
+void Line::translate(int dx,int dy){
+	mBeginPoint.translate(dx,dy);
+	mEndPoint.translate(dx,dy);
+	mWidth = abs(mBeginPoint.x-mEndPoint.x + 1);
+	mHeight = abs(mBeginPoint.y-mEndPoint.y + 1);
+}
+
+Point Line::getBeginPoint() const {
 	return mBeginPoint;
 }
 
-Point Line::getEndPoint() {
+Point Line::getEndPoint() const{
 	return mEndPoint;
 }
 

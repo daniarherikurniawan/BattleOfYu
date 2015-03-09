@@ -1,9 +1,12 @@
 #ifndef POLYGON3D_H
 #define POLYGON3D_H
-
+#include <vector>
 #include "Line3D.h"
+#include "Drawable.h"
 
-class Polygon3D {
+using namespace std;
+
+class Polygon3D : public Drawable {
 	vector<Line3D> lines;
 	
 public:

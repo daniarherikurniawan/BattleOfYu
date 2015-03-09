@@ -4,7 +4,7 @@
 #include "Pixel.h"
 #include "Drawable.h"
 #include "Line.h"
-#include "CameraService.h"
+
 
 
 class Line3D: public Drawable {

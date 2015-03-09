@@ -26,3 +26,16 @@ int Drawable::getHeight() const{
 Drawable::~Drawable() {
 	
 }
+
+void Drawable::beforeDraw(){
+	printf("fungsi beforeDraw() belum diimplementasikan child\n");
+}
+
+void Drawable::afterDraw(){
+	printf("fungsi afterDraw() belum diimplementasikan child\n");
+}
+//fungsi ini harus dioverride oleh child class
+//cuman sekedar biar gak compile error
+void Drawable::rotate(int angle,int x0,int y0){
+	printf("This object does not support rotation\n");
+}

@@ -3,6 +3,10 @@
 struct Point;
 struct Color;
 
+void Point::translate(int dx,int dy){
+	x += dx; y += dy;
+}
+
 void Pixel::rotate(int angle){
 	Point p = this->getPosition();
 	p.rotate(angle);
@@ -37,6 +41,21 @@ Point::Point() : x(0),y(0) {
 }
 Point::Point(int x,int y) : x(x),y(y) {
 
+}
+
+double Point::crossProduct(Point p,Point q,Point r){
+	return (double) (r.x - q.x) * (p.y - q.y) - (r.y - q.y) * (p.x - q.x);
+}
+
+bool Point::ccwTurn(Point p,Point q,Point r){
+	return Point::crossProduct(p,q,r) > 0.0;
+}
+
+double Point::angle(Point a,Point b,Point c){
+	double ux = b.x - a.x, uy = b.y - a.y;
+	double vx = c.x - a.x, vy = c.y - a.y;
+	return acos((ux * vx + uy * vy) /
+		sqrt((ux * ux + uy * uy) * (vx * vx + vy * vy)));
 }
 
 Point3D::Point3D(): x(0),y(0),z(0){};

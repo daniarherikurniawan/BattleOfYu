@@ -10,6 +10,11 @@ struct Point {
 	int y;
 	Point();
 	Point(int x,int y);
+	static double crossProduct(Point p,Point q,Point r);
+	static bool ccwTurn(Point p,Point q,Point r);
+	static double angle(Point p,Point q,Point r);
+	
+	void translate(int dx,int dy);
 	void rotate(int degree){
 		double rad = 2.0*PI*degree/360.0;
 		double _x = x*cos(rad) - y*sin(rad);
@@ -22,6 +27,7 @@ struct Point {
 		rotate(degree);
 		x += x0; y += y0;
 	}
+	
 };
 
 struct Point3D {
