@@ -42,3 +42,6 @@ line3ddemo:
 mapdemo:
 	g++ -o bin/mapdemo demo/CubeDemo.cpp Pixel.cpp Screen.cpp Line.cpp Drawable.cpp CameraService.cpp Line3D.cpp Keyboard.cpp WorldManager.cpp Polygon3D.cpp Polygon.cpp
 
+colorpicker:
+	g++ colorpicker.cpp -o bin/colorpicker
+

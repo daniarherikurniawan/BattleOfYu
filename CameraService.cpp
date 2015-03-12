@@ -12,6 +12,16 @@ void CameraService::handleInput(){
 			campos.translate(-DISPLACEMENT,0.,0.);
 		} else if (Keyboard::getKeyDownCode() == Keyboard::KEY_D){
 			campos.translate(+DISPLACEMENT,0.,0.);
+		} else if (Keyboard::getKeyDownCode() == Keyboard::KEY_W){
+			campos.translate(0.,+DISPLACEMENT,0.);
+		} else if (Keyboard::getKeyDownCode() == Keyboard::KEY_S){
+			campos.translate(0.,-DISPLACEMENT,0.);
+		} else if (Keyboard::getKeyDownCode() == Keyboard::KEY_Q){
+			campos.translate(0.,0.,+DISPLACEMENT);
+		} else if (Keyboard::getKeyDownCode() == Keyboard::KEY_E){
+			campos.translate(0.,0.,-DISPLACEMENT);
+		} else if (Keyboard::getKeyDownCode() == Keyboard::KEY_L){
+			exit(EXIT_SUCCESS);
 		}
 	}
 }

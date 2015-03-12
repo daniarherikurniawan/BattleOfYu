@@ -3,7 +3,7 @@
 
 #include "Pixel.h"
 #include "Keyboard.h"
-#define DISPLACEMENT 0.01
+#define DISPLACEMENT 10
 
 class CameraService {
 public:

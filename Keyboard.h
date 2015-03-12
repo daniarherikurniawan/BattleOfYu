@@ -18,6 +18,8 @@ public:
 	static const char KEY_J = 106;
 	static const char KEY_K = 107;
 	static const char KEY_L = 108;
+	static const char KEY_Q = 113;
+	static const char KEY_E = 101;
 	static bool isKeyDown();
 	static void startListening();
 	static int getKeyDownCode();

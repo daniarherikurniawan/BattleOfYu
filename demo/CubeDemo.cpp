@@ -55,20 +55,12 @@ int main () {
 	CameraService::position.x = 0;
 	CameraService::position.y = 0;
 	CameraService::position.z = 0;
-	for (int j = 0; j < 30000; j++) {
+	Keyboard::startListening();
+	while (1){
 		screen.beginBatch();
 		screen.draw(&pcube);
+		CameraService::handleInput();
 		screen.endBatch();
-		
-		//update camera
-		if (j < 10000){
-			CameraService::position.x += 0.03;
-		} else if (j < 20000){
-			CameraService::position.y += 0.03;
-		} else {
-			//zoom : semakin kecil semakin besar objeknya
-			CameraService::position.z -= 0.03;
-		}
 	}
 	
 	for (int i = 0; i < 12; i++) {
