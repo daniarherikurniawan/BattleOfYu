@@ -16,14 +16,16 @@ class WorldManager : public Drawable{
 	int mWidth;
 	int mHeight;
 	Color mBuffer[MAX_WIDTH][MAX_HEIGHT];
-	void fillBuffer();
+	
 	
 public:
-	int getWidth();
-	int getHeight();
+	int getWidth() const;
+	int getHeight() const;
+	int getPolygonSize() const;
 	void setHeight(int _width);
 	void setWidth(int _height);
-	vector<Pixel> getPixels();
+	void fillBuffer();
+	vector<Pixel> getPixels() const;
 	
 };
 

@@ -39,6 +39,7 @@ struct Point3D {
 	void translate(double x0,double y0,double z0){
 		x += x0; y += y0; z += z0;
 	}
+	Point convertToPoint2D();
 };
 
 struct Color {

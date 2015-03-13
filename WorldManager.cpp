@@ -1,7 +1,7 @@
 #include "WorldManager.h"
 
-int WorldManager::getWidth(){ return mWidth;}
-int WorldManager::getHeight(){ return mHeight;}
+int WorldManager::getWidth() const { return mWidth;}
+int WorldManager::getHeight() const { return mHeight;}
 
 void WorldManager::setWidth(int _width){
 	if (_width < MAX_WIDTH){
@@ -18,14 +18,21 @@ void WorldManager::setHeight(int _height){
 	}
 }
 
-//TBD
+int WorldManager::getPolygonSize() const{
+	return mPolygons.size();
+}
+
 void WorldManager::fillBuffer(){
+	for(int i = 0; i < getPolygonSize(); i++){
+		Polygon3D &p3d = mPolygons[i];
+		Polygon p2d = p3d.convertToPolygon2D();
+		vector<Pixel> pixels = p2d.getPixels();
+	}
 }
 
 //TBD
 
-vector<Pixel> WorldManager::getPixels(){
-	fillBuffer();
+vector<Pixel> WorldManager::getPixels() const{
 	
 	//create pixel based on buffer
 	vector<Pixel> retval;

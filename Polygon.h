@@ -4,20 +4,25 @@
 #include "Line.h"
 #include "Pixel.h"
 #include <cmath>
+#include <algorithm>
+using namespace std;
+
 
 //asumsi ini convex polygon
 
 class Polygon: public Drawable {
 	vector<Line> lines;
-	int mColor;
+	Color mColor;
 	
 public:
 	Polygon();
 	~Polygon();
 	vector<Pixel> getPixels() const;
-	
+	vector<Point> getPointsInside() const;
 	void add(Line line);
 	int getSize() const;
+	Point getTopLeft() const;
+	Point getBottomRight() const;
 	int getLeftMostX() const;
 	int getTopMostY() const;
 	bool pointInPolygon(Point p) const;

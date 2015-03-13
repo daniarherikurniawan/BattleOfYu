@@ -3,12 +3,72 @@
 Polygon::Polygon(){}
 Polygon::~Polygon(){}
 
+
+//nanti ini diganti
 vector<Pixel> Polygon::getPixels() const{
 	vector<Pixel> retval;
 	for(int i = 0; i < getSize(); i++){
 		vector<Pixel> linePixel = lines[i].getPixels();
 		for(int j = 0; j < (int) linePixel.size(); ++j){
 			retval.push_back(linePixel[j]);
+		}
+	}
+	return retval;
+}
+/*
+vector<Pixel> Polygon::getPixels() const {
+	vector<Point> points = getPointsInside();
+	
+	vector<Pixel> pixels;
+	for(int i = 0; i < (int) points.size(); i++){
+		Pixel pixel(points[i],mColor);
+		pixels.push_back(pixel);
+	}
+	return pixels;
+}*/
+
+Point Polygon::getTopLeft() const {
+	Point ret;
+	for(int i = 0; i < getSize(); ++i){
+		if (i == 0){
+			ret = lines[i].getBeginPoint();
+		}
+		Point bp = lines[i].getBeginPoint();
+		Point ep = lines[i].getEndPoint();
+		ret.x = min(ret.x,min(bp.x,ep.x));
+		ret.y = min(ret.y,min(bp.y,ep.y));
+	}
+	return ret;
+}
+
+Point Polygon::getBottomRight() const{
+	Point ret;
+	for(int i = 0; i < getSize(); ++i){
+		if (i == 0){
+			ret = lines[i].getBeginPoint();
+		}
+		Point bp = lines[i].getBeginPoint();
+		Point ep = lines[i].getEndPoint();
+		ret.x = max(ret.x,max(bp.x,ep.x));
+		ret.y = max(ret.y,max(bp.y,ep.y));
+	}
+	return ret;
+}
+	
+vector<Point> Polygon::getPointsInside() const {
+	//buat persegi panjang
+	Point topLeft = getTopLeft();
+	Point bottomRight = getBottomRight();
+	vector<Point> retval;
+	
+	//untuk setiap titik
+	for(int x = topLeft.x; x <= bottomRight.x; x++){
+		for(int y = topLeft.y; y <= bottomRight.y; y++){		
+			Point p(x,y);
+			//jika didalam polygon
+			if (pointInPolygon(p)){
+				retval.push_back(p);
+			}
 		}
 	}
 	return retval;

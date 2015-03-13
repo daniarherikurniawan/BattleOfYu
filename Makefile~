@@ -34,7 +34,6 @@ polygon3d:
 	g++ -o bin/polygon3d demo/Polygon3DDemo.cpp Pixel.cpp Screen.cpp Line.cpp Drawable.cpp CameraService.cpp Line3D.cpp Keyboard.cpp Polygon3D.cpp Polygon.cpp
 	
 cubedemo:
-<<<<<<< HEAD
 	g++ -o bin/cubedemo demo/CubeDemo.cpp Pixel.cpp Screen.cpp Line.cpp Drawable.cpp CameraService.cpp Line3D.cpp Keyboard.cpp Polygon3D.cpp Polygon.cpp
 	
 line3ddemo:
@@ -43,9 +42,6 @@ line3ddemo:
 mapdemo:
 	g++ -o bin/mapdemo demo/CubeDemo.cpp Pixel.cpp Screen.cpp Line.cpp Drawable.cpp CameraService.cpp Line3D.cpp Keyboard.cpp WorldManager.cpp Polygon3D.cpp Polygon.cpp
 
-=======
-	g++ -o bin/cubedemo demo/CubeDemo.c Pixel.cpp Screen.cpp Line.cpp Drawable.cpp
-
 colorpicker:
 	g++ colorpicker.cpp -o bin/colorpicker
->>>>>>> 37bd71c20f1ea5f25e4672009e1bc7d7953393fd
+

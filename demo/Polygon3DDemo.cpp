@@ -43,19 +43,24 @@ int main () {
 	CameraService::position.y = 0;
 	CameraService::position.z = 0;
 	
-	Polygon p2d = pcube.getPolygon2D();
+	Polygon p2d = pcube.convertToPolygon2D();
 	printf("before translate\n");
 	p2d.printLines();
 	
 	printf("after translate (-length,0,0)\n");
 	pcube.translate(-length,0,0);
-	p2d = pcube.getPolygon2D();
+	p2d = pcube.convertToPolygon2D();
 	p2d.printLines();
 	
 	printf("after translate again (0,-length,0)\n");
 	pcube.translate(0,-length,0);
-	p2d = pcube.getPolygon2D();
+	p2d = pcube.convertToPolygon2D();
 	p2d.printLines();
+	
+	vector<Pixel> pixels = p2d.getPixels();
+	for(int i = 0; i < (int) pixels.size(); i++){
+		printf("%d %d\n",pixels[i].getPosition().x,pixels[i].getPosition().y);
+	}
 	for (int i = 0; i < 12; i++) {
 		delete cube[i];
 	}
