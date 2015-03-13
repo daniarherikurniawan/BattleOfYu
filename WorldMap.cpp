@@ -55,6 +55,8 @@ vector<Line> WorldMap::getLines() const{
 
 vector<Pixel> WorldMap::getPixels() const {
 	vector<Pixel> pixels;
+	vector<Line> mLines;
+	mLines = getLines();
 	for (int i=0;i<mLines.size();i++) {
 		vector<Pixel> linePixels = mLines[i].getPixels();
 		pixels.insert(pixels.end(),linePixels.begin(),linePixels.end());

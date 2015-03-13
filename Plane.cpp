@@ -2,6 +2,8 @@
 
 Plane::Plane() {
 	mLines.clear();
+	this->x = 0;
+	this->y = 0;
 }
 
 Plane::Plane(string inputFile) {
@@ -28,6 +30,8 @@ Plane::Plane(string inputFile) {
 		numberOfComponent--;
 	}
 	inputStream.close();
+	this->x = 0;
+	this->y = 0;
 }
 
 void Plane::readFromFile(string inputFile) {
@@ -53,6 +57,22 @@ void Plane::readFromFile(string inputFile) {
 		numberOfComponent--;
 	}
 	inputStream.close();
+}
+
+void Plane::moveBy(int x, int y){
+	this->x = this->x + x;
+	this->y = this->y + y;
+
+	for(int i = 0; i < mLines.size(); i++) {
+		Point mNewBegin, mNewEnd;
+		mNewBegin.x = mLines[i].getBeginPoint().x + x;
+		mNewBegin.y = mLines[i].getBeginPoint().y + y;
+		mNewEnd.x = mLines[i].getEndPoint().x + x;
+		mNewEnd.y = mLines[i].getEndPoint().y + y;
+
+		mLines[i].setBeginPoint(mNewBegin);
+		mLines[i].setEndPoint(mNewEnd);
+	}
 }
 
 vector<Line> Plane::getLines() const {

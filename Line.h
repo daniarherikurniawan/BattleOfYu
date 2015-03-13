@@ -20,6 +20,9 @@ public :
 	Color getColor() const;
 	Point getBeginPoint();
 	Point getEndPoint();
+
+	void setBeginPoint(Point mBegin);
+	void setEndPoint(Point mEnd);
 };
 
 #endif

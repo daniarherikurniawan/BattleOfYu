@@ -16,10 +16,12 @@ class WorldMap : public Drawable{
 private:
 	vector<Line> mLines; 
 	Rectangle mWindowPort;
-	Plane plane;
-	Ship ship;
+	
 	vector<Line> allLines;
 public:
+	Plane plane;
+	Ship ship;
+
 	WorldMap();
 	WorldMap(string inputFile);
 	void setWindowPort(Rectangle windowPort);

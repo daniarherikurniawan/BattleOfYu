@@ -31,7 +31,4 @@ testship:
 	g++ Ship.cpp WorldMap.cpp Pixel.cpp Screen.cpp Line.cpp CompositeDrawable.cpp Util.cpp Keyboard.cpp MatrixDrawable.cpp Drawable.cpp ClipDrawable.cpp Rectangle.cpp
 
 cubedemo:
-	g++ -o bin/cubedemo demo/CubeDemo.c Pixel.cpp Screen.cpp Line.cpp Drawable.cpp
-
-colorpicker:
-	g++ colorpicker.cpp -o bin/colorpicker
+	g++ -o bin/cubedemo demo.CubeDemo.c Pixel.cpp Screen.cpp Line.cpp Drawable.cpp
