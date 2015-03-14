@@ -13,6 +13,7 @@
 #include "../Propeller.hpp"
 #include <unistd.h>
 
+int applyGravity(CompositeDrawable* cd, int speed); //quickfix applyGravity
 
 const long long SECONDS_PER_FRAME = 1000/60; // yang ini speed looping gamenya
 const int FRAMERATE = 25000; // yang ini speed buat efek pesawat jatoh dkk
@@ -179,7 +180,6 @@ int main() {
 
 	float speed = 0;
 	float initialPercentage = 0;
-
 	
 	/* Game Clock */
 	while (true) {
@@ -202,7 +202,7 @@ int main() {
 
 			propeller.applyGravity((int)speed);
 
-			parasut.applyGravity((int)speed);
+			applyGravity(&parasut,(int)speed);
 			screen.draw(&parasut);
 
 			if (!isPlaneGrounded){
@@ -356,7 +356,18 @@ int main() {
 }
 
 
-
+int applyGravity(CompositeDrawable* cd, int speed) {
+	int y = cd->getTopMostY() + speed;
+	int x = cd->getLeftMostX();
+	if (y > 490) {
+		cd->setPosition(x,490);
+		return 1;
+	}
+	else {
+		cd->setPosition(x,y);
+		return 0;
+	}
+}
 
 // coretan
 	//screen.drawPixel(pixel);
