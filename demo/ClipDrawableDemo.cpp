@@ -5,6 +5,7 @@
 #include "../Keyboard.h"
 #include "../ClipDrawable.h"
 #include "../Util.h"
+#include "../Mouse.h"
 
 const long long SECONDS_PER_FRAME = 1000/60;
 
@@ -13,20 +14,32 @@ ClipDrawable clipDrawable(150,150,150,150);
 
 void handleInput() {
 	if (Keyboard::isKeyDown()) {
-		if (Keyboard::getKeyDownCode() == Keyboard::KEY_D)
+		if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_D)
 			clipDrawable.panBy(3,0);
-		else if (Keyboard::getKeyDownCode() == Keyboard::KEY_A)
+		else if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_A)
 			clipDrawable.panBy(-3,0);
-		else if (Keyboard::getKeyDownCode() == Keyboard::KEY_S)
+		else if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_S)
 			clipDrawable.panBy(0,3);
-		else if (Keyboard::getKeyDownCode() == Keyboard::KEY_W)
+		else if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_W)
 			clipDrawable.panBy(0,-3);
-		else if (Keyboard::getKeyDownCode() == Keyboard::KEY_I)
+		else if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_I)
 			clipDrawable.zoomBy(1.2);
-		else if (Keyboard::getKeyDownCode() == Keyboard::KEY_K)
+		else if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_K)
 			clipDrawable.zoomBy(0.8);
-		else if (Keyboard::getKeyDownCode() == Keyboard::KEY_L)
+		else if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_L)
 			exit(0);
+	}
+	Mouse::update();
+	if (Mouse::isMouseEvent()) {
+		if (Mouse::getMouseEventCode() == Mouse::MOUSE_LEFT_PRESS) {
+
+		} else if (Mouse::getMouseEventCode() == Mouse::MOUSE_LEFT_RELEASE) {
+
+		} else if (Mouse::getMouseEventCode() == Mouse::MOUSE_RIGHT_PRESS) {
+
+		} else if (Mouse::getMouseEventCode() == Mouse::MOUSE_RIGHT_RELEASE) {
+
+		}
 	}
 }
 
@@ -49,6 +62,9 @@ int main() {
 	clipDrawable.setWorldMap(worldMap);
 	clipDrawable.setPosition(135,160);
 	Keyboard::startListening();
+	Mouse::startListening("event3");
+
+	CompositeDrawable mousePointer("../mousePointer.txt");
 
 	while(true){
 		if (accumulateTime>SECONDS_PER_FRAME){
@@ -80,8 +96,9 @@ int main() {
 			}
 
 			clipDrawable.setWorldMap(worldMap);
-
+			mousePointer.setPosition(Mouse::getPositionX()-mousePointer.getWidth()/2,Mouse::getPositionY()-mousePointer.getHeight()/2);
 			screen.beginBatch();
+			screen.draw(&mousePointer);
 			screen.draw(&worldMap);
 			screen.draw(&clipDrawable);
 			screen.endBatch();

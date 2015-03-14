@@ -18,23 +18,23 @@ Line line(beginPosition,endPosition,color);
 CompositeDrawable ship ("../battleship_topview.txt");
 void handleInput() {
 	if (Keyboard::isKeyDown()) {
-		if (Keyboard::getKeyDownCode() == Keyboard::KEY_D){
+		if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_D){
 			ship.moveBy(2,0);
 			isflip=false;		
 		}
-		else if (Keyboard::getKeyDownCode() == Keyboard::KEY_A){
+		else if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_A){
 			ship.moveBy(-2,0);
 			isflip=true;		
 		}
-		if (Keyboard::getKeyDownCode() == Keyboard::KEY_L){
+		if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_L){
 			ship.moveBy(2,0);
 			isflip=false;
 		}
-		else if (Keyboard::getKeyDownCode() == Keyboard::KEY_J){
+		else if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_J){
 			isflip=true;
 			ship.moveBy(-2,0);
 		}
-		else if (Keyboard::getKeyDownCode() == Keyboard::KEY_W)
+		else if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_W)
 			exit(0);
 	}
 }
