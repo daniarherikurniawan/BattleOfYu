@@ -24,17 +24,6 @@ struct Point {
 	}
 };
 
-struct Point3D {
-	double x;
-	double y;
-	double z;
-	Point3D();
-	Point3D(double x,double y,double z);
-	void translate(double x0,double y0,double z0){
-		x += x0; y += y0; z += z0;
-	}
-};
-
 struct Color {
 	int red;
 	int green;
