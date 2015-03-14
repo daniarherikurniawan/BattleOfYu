@@ -45,4 +45,5 @@ mapdemo:
 colorpicker:
 	g++ colorpicker.cpp -o bin/colorpicker
 
-
+enemy:
+	g++ -o bin/enemy demo/EnemyDemo.cpp Pixel.cpp Screen.cpp Line.cpp CompositeDrawable.cpp Util.cpp Keyboard.cpp Peluru.cpp Bitmap.cpp MatrixDrawable.cpp Drawable.cpp Enemy.cpp
