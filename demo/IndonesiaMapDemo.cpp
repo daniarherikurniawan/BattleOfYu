@@ -16,27 +16,31 @@ Color lineColor(255,0,0,0);
 Line line(beginPosition,endPosition,color);
 
 CompositeDrawable map ("../pulau/peta.txt");
+CompositeDrawable mousePointer("../mousePointer.txt");
+
 void handleInput() {
 	if (Keyboard::isKeyDown()) {
-		if (Keyboard::getKeyDownCode() == Keyboard::KEY_D){
+		if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_D){
 			map.moveBy(2,0);
 			isflip=false;		
 		}
-		else if (Keyboard::getKeyDownCode() == Keyboard::KEY_A){
+		else if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_A){
 			map.moveBy(-2,0);
 			isflip=true;		
 		}
-		if (Keyboard::getKeyDownCode() == Keyboard::KEY_L){
+		if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_L){
 			map.moveBy(2,0);
 			isflip=false;
 		}
-		else if (Keyboard::getKeyDownCode() == Keyboard::KEY_J){
+		else if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_J){
 			isflip=true;
 			map.moveBy(-2,0);
 		}
-		else if (Keyboard::getKeyDownCode() == Keyboard::KEY_W)
+		else if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_W)
 			exit(0);
 	}
+	
+  }
 }
 
 int main() {
@@ -45,7 +49,6 @@ int main() {
 	
 	long long accumulateTime = 0;
 	Keyboard::startListening();
-	
 	map.setPosition(200,10);
 	
 	map.setPosition(10,200);

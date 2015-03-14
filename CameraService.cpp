@@ -8,19 +8,19 @@ void CameraService::handleInput(){
 	Point3D &campos = CameraService::position;
 	
 	if (Keyboard::isKeyDown()){
-		if (Keyboard::getKeyDownCode() == Keyboard::KEY_A){
+		if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_A){
 			campos.translate(-DISPLACEMENT,0.,0.);
-		} else if (Keyboard::getKeyDownCode() == Keyboard::KEY_D){
+		} else if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_D){
 			campos.translate(+DISPLACEMENT,0.,0.);
-		} else if (Keyboard::getKeyDownCode() == Keyboard::KEY_W){
+		} else if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_W){
 			campos.translate(0.,+DISPLACEMENT,0.);
-		} else if (Keyboard::getKeyDownCode() == Keyboard::KEY_S){
+		} else if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_S){
 			campos.translate(0.,-DISPLACEMENT,0.);
-		} else if (Keyboard::getKeyDownCode() == Keyboard::KEY_Q){
+		} else if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_Q){
 			campos.translate(0.,0.,+DISPLACEMENT);
-		} else if (Keyboard::getKeyDownCode() == Keyboard::KEY_E){
+		} else if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_E){
 			campos.translate(0.,0.,-DISPLACEMENT);
-		} else if (Keyboard::getKeyDownCode() == Keyboard::KEY_L){
+		} else if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_L){
 			exit(EXIT_SUCCESS);
 		}
 	}

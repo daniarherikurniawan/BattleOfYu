@@ -23,7 +23,7 @@ CompositeDrawable ship("../ship.txt");
 
 void handleInput() {
 	if (Keyboard::isKeyDown()) {
-		if (Keyboard::getKeyDownCode() == Keyboard::KEY_W)
+		if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_W)
 			exit(0);
 	}
 }

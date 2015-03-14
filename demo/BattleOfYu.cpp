@@ -13,6 +13,7 @@
 #include "../Propeller.hpp"
 #include <unistd.h>
 
+int applyGravity(CompositeDrawable* cd, int speed); //quickfix applyGravity
 
 const long long SECONDS_PER_FRAME = 1000/60; // yang ini speed looping gamenya
 const int FRAMERATE = 25000; // yang ini speed buat efek pesawat jatoh dkk
@@ -78,14 +79,14 @@ void gotoxy(int x,int y){
 
 void handleInput() {
 	if (Keyboard::isKeyDown()) {
-		if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_D && !isPlane && !isShip){
+		if (Keyboard::getKeyDownCode() == Keyboard::KEY_D && !isPlane && !isShip){
 			isFlipShip = false;
 			ship.moveBy(2,0);
-		}else if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_A && !isPlane && !isShip){
+		}else if (Keyboard::getKeyDownCode() == Keyboard::KEY_A && !isPlane && !isShip){
 			isFlipShip = true;
 			ship.moveBy(-2,0);
 			
-		}else if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_L && !isPlane && !isShip){
+		}else if (Keyboard::getKeyDownCode() == Keyboard::KEY_L && !isPlane && !isShip){
 			if (!isFlipPlane){
 				propeller.moveBy(-90,0);
 				roda1.moveBy(20,0);
@@ -98,7 +99,7 @@ void handleInput() {
 			roda2.moveBy(2,0);
 			parasut.moveBy(2,0);
 			
-		}else if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_J && !isPlane && !isShip){
+		}else if (Keyboard::getKeyDownCode() == Keyboard::KEY_J && !isPlane && !isShip){
 			if (isFlipPlane){
 				propeller.moveBy(90,0);
 				roda1.moveBy(-20,0);
@@ -110,9 +111,9 @@ void handleInput() {
 			roda1.moveBy(-2,0);
 			roda2.moveBy(-2,0);
 			parasut.moveBy(-2,0);
-		}else if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_W)
+		}else if (Keyboard::getKeyDownCode() == Keyboard::KEY_W)
 			exit(0);
-		else if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_S && !isPlane && !isShip){
+		else if (Keyboard::getKeyDownCode() == Keyboard::KEY_S && !isPlane && !isShip){
 			int pos = peluruKosong();
 			if (pos != -1){
 				b[pos] = bf.create(BulletFactory::LASER);
@@ -121,7 +122,7 @@ void handleInput() {
 				b[pos]->setPoint(Point(st.x + 115, st.y + 60));
 			}
 		}
-		else if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_K && !isPlane && !isShip){
+		else if (Keyboard::getKeyDownCode() == Keyboard::KEY_K && !isPlane && !isShip){
 			int pos = peluruKosong();
 			if (pos != -1){
 				b[pos] = bf.create(BulletFactory::LASER);
@@ -179,7 +180,6 @@ int main() {
 
 	float speed = 0;
 	float initialPercentage = 0;
-
 	
 	/* Game Clock */
 	while (true) {
@@ -202,7 +202,7 @@ int main() {
 
 			propeller.applyGravity((int)speed);
 
-			parasut.applyGravity((int)speed);
+			applyGravity(&parasut,(int)speed);
 			screen.draw(&parasut);
 
 			if (!isPlaneGrounded){
@@ -356,7 +356,18 @@ int main() {
 }
 
 
-
+int applyGravity(CompositeDrawable* cd, int speed) {
+	int y = cd->getTopMostY() + speed;
+	int x = cd->getLeftMostX();
+	if (y > 490) {
+		cd->setPosition(x,490);
+		return 1;
+	}
+	else {
+		cd->setPosition(x,y);
+		return 0;
+	}
+}
 
 // coretan
 	//screen.drawPixel(pixel);
