@@ -27,8 +27,7 @@ int main () {
 	cube [9] = new Line3D(length,length,0,length,length,length);
 	cube [10] = new Line3D(0,length,length,length,length,length);
 	cube [11] = new Line3D(length,0,length,length,length,length);
-
-	for (int i = 0; i < 12; i++) {
+	for (int i = 0; i < 1; i++) {
 		cube[i]->translate(-length/2,-length/2,0);
 		cube2D[i] = transform((cube[i]));
 		translate(cube2D[i], length, length);
@@ -37,7 +36,7 @@ int main () {
 	Screen screen;
 	for (int j = 0; j < 100000; j++) {
 		screen.beginBatch();
-		for (int i = 0; i < 12; i++) {
+		for (int i = 0; i < 1; i++) {
 			cube[i]->translate(speed,speed,0);
 			cube2D[i] = transform((cube[i]));
 			translate(cube2D[i], length, length);
@@ -45,8 +44,7 @@ int main () {
 		}
 		screen.endBatch();
 	}
-	
-	for (int i = 0; i < 12; i++) {
+	for (int i = 0; i < 1; i++) {
 		delete cube2D[i];
 		delete cube[i];
 	}
@@ -55,10 +53,10 @@ int main () {
 
 Line* transform (Line3D* ln) {
 	Point first, last;
-	first.x = ln->p1.x / (ln->p1.z*scale + 1);
-	first.y = ln->p1.y / (ln->p1.z*scale + 1);
-	last.x = ln->p2.x / (ln->p2.z*scale + 1);
-	last.y = ln->p2.y / (ln->p2.z*scale + 1);
+	first.x = (ln->getBeginPoint()).x / ((ln->getBeginPoint()).z*scale + 1);
+	first.y = (ln->getBeginPoint()).y / ((ln->getBeginPoint()).z*scale + 1);
+	last.x = (ln->getEndPoint()).x / ((ln->getEndPoint()).z*scale + 1);
+	last.y = (ln->getEndPoint()).y / ((ln->getEndPoint()).z*scale + 1);
 	Color white(255,255,255,0);
 	Line* l = new Line(first,last,white);
 	return l;

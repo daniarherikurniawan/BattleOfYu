@@ -12,7 +12,6 @@ private :
 	Color mColor;
 	
 public :
-	Line() : mBeginPoint(0,0), mEndPoint(0,0), mColor(0,0,0,0) {}
 	Line(Point beginPoint,Point endPoint,Color color);
 	vector<Pixel> getPixels() const;
 	int getLeftMostX() const;
