@@ -1,5 +1,6 @@
 #include "Screen.h"
-
+#define SCREEN_OFFSET_WIDTH 320.
+#define SCREEN_OFFSET_HEIGHT 240.
 Screen::Screen() {
 	system("reset");
 	frameBufferFileDescriptor = open("/dev/fb0",O_RDWR);
@@ -47,6 +48,12 @@ void Screen::drawPixel(Pixel pixel) {
 void Screen::draw(Drawable *drawable) {
 	drawable->beforeDraw();
 	vector<Pixel> pixels = drawable->getPixels();
+	for(int i = 0; i < pixels.size(); i++){
+		Point p = pixels[i].getPosition();
+		p.y += SCREEN_OFFSET_HEIGHT;
+		p.x += SCREEN_OFFSET_WIDTH;
+		pixels[i].setPosition(p);
+	}
 	for (int i=0;i<pixels.size();i++) {
 		drawPixel(pixels[i]);
 	}

@@ -37,11 +37,18 @@ int main () {
 	cube[11] = new Line3D(0,0,length,length,0,length);
 	
 	Polygon3D pcube;
+	Polygon3D pcube2;
 	for(int i = 0; i < 12; i++){
 		pcube.add(cube[i]);
 	}
+	for(int i= 0; i < 12; i++){
+		pcube2.add(cube[i]);
+	}
+	
 	//kubus taruh tengah
-	pcube.translate(length*3.5,length*3.5,0);
+	pcube.translate(-200,0,0);
+	pcube2.translate(200,0,0);
+	//pcube2.translate(-400.,0.,0.);
 	for (int i = 0; i < 12; i++) {
 		
 		cube[i]->translate(length*3.5,length*3.5,0);
@@ -59,6 +66,7 @@ int main () {
 	while (1){
 		screen.beginBatch();
 		screen.draw(&pcube);
+		screen.draw(&pcube2);
 		CameraService::handleInput();
 		screen.endBatch();
 	}

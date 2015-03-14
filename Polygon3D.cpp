@@ -42,7 +42,8 @@ Polygon3D::Polygon3D(string filename){
 }
 
 void Polygon3D::add(Line3D* line){
-	lines.push_back(*line);	
+	Line3D _line = *line;
+	lines.push_back(_line);	
 }
 
 void Polygon3D::clear(){
