@@ -18,13 +18,6 @@ int Enemy::getTopMostY() const {
 	return center.y - radius;
 }
 
-int Enemy::getRightMostX() const {
-	return center.x + radius;
-}
-int Enemy::getBottomMostY() const {
-	return center.y + radius;
-}
-
 vector<Pixel> Enemy::getPixels() const {
 	vector<Pixel> pixels;
 

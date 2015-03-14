@@ -9,17 +9,17 @@ const long long SECONDS_PER_FRAME = 1000/60;
 
 void handleInput() {
 	if (Keyboard::isKeyDown()) {
-		if (Keyboard::getKeyDownCode() == Keyboard::KEY_D){
+		if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_D){
 			Point explosionCenter(plane.getWidth()/2,plane.getHeight()/2);
 
 			//Ini harus dipanggil sebelum meledak
 			plane.startExplode(explosionCenter);		
 		}
-		else if (Keyboard::getKeyDownCode() == Keyboard::KEY_A) {
+		else if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_A) {
 			//Ini harus dipanggil setelah meledak selesai. Tidak boleh tidak
 			plane.finishExplode();
 		}
-		else if (Keyboard::getKeyDownCode() == Keyboard::KEY_W) {
+		else if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_W) {
 			exit(0);
 		}
 	}

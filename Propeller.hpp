@@ -98,7 +98,9 @@ void Propeller::draw(Screen* screen){
 void Propeller::setState(int _state){ state = _state; }
 
 void Propeller::translate(int dx,int dy){
-	c_draw_elmt->translate(dx,dy);
+	int x = c_draw_elmt->getLeftMostX() + dx;
+	int y = c_draw_elmt->getTopMostY() + dy;
+	c_draw_elmt->setPosition(x,y);
 }
 
 void Propeller::beforeDraw(){
