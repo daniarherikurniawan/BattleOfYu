@@ -46,4 +46,10 @@ colorpicker:
 	g++ colorpicker.cpp -o bin/colorpicker
 
 enemy:
-	g++ -o bin/enemy demo/EnemyDemo.cpp Pixel.cpp Screen.cpp Line.cpp CompositeDrawable.cpp Util.cpp Keyboard.cpp Peluru.cpp Bitmap.cpp MatrixDrawable.cpp Drawable.cpp Enemy.cpp
+	g++ -o bin/enemy demo/EnemyDemo.cpp Pixel.cpp CameraService.cpp Screen.cpp Line.cpp Drawable.cpp Enemy.cpp Line3D.cpp Keyboard.cpp Polygon3D.cpp Polygon.cpp WorldManager.cpp Crosshair.cpp
+
+crosshair:
+	g++ -o bin/crosshair demo/CrosshairDemo.cpp Pixel.cpp CameraService.cpp Screen.cpp Line.cpp Drawable.cpp Enemy.cpp Line3D.cpp Keyboard.cpp Polygon3D.cpp Polygon.cpp WorldManager.cpp Crosshair.cpp
+
+enemymanager:
+	g++ -o bin/enemymanager demo/EnemyManagerDemo.cpp Pixel.cpp CameraService.cpp Screen.cpp Line.cpp Drawable.cpp Enemy.cpp Line3D.cpp Keyboard.cpp Polygon3D.cpp Polygon.cpp WorldManager.cpp Crosshair.cpp EnemyManager.cpp

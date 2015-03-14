@@ -1,4 +1,4 @@
-#include "../Enemy.h"
+#include "../Crosshair.h"
 #include "../Screen.h"
 #include <unistd.h>
 
@@ -7,11 +7,11 @@ void gotoxy(int x,int y){
 }
 
 int main() {
-	Enemy enemy (Point(0,0), Color(255,0,0,0));
+	Crosshair crosshair;
 	Screen screen;
 
 	screen.beginBatch();
-	screen.draw(&enemy);
+	screen.draw(&crosshair);
 	screen.endBatch();
 	return 0;
 }
