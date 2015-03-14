@@ -6,9 +6,11 @@
 #include "../CameraService.h"
 #include "../Polygon3D.h"
 #include <iostream>
+#include "../Crosshair.h"
 
 Line* transform (Line3D* ln);
 void translate (Line* ln, int x, int y);
+Crosshair crosshair;
 
 float scale = 0.001;
 
@@ -63,10 +65,12 @@ int main () {
 	CameraService::position.y = 0;
 	CameraService::position.z = 0;
 	Keyboard::startListening();
+	crosshair.setPosition(Point(100,100));
 	while (1){
 		screen.beginBatch();
 		screen.draw(&pcube);
 		screen.draw(&pcube2);
+		screen.draw(&crosshair);
 		CameraService::handleInput();
 		screen.endBatch();
 	}

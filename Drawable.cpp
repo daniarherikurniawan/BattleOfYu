@@ -28,11 +28,11 @@ Drawable::~Drawable() {
 }
 
 void Drawable::beforeDraw(){
-	printf("fungsi beforeDraw() belum diimplementasikan child\n");
+	//printf("fungsi beforeDraw() belum diimplementasikan child\n");
 }
 
 void Drawable::afterDraw(){
-	printf("fungsi afterDraw() belum diimplementasikan child\n");
+	//printf("fungsi afterDraw() belum diimplementasikan child\n");
 }
 //fungsi ini harus dioverride oleh child class
 //cuman sekedar biar gak compile error
