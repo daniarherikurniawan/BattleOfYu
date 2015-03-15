@@ -22,8 +22,8 @@
 
 #include "EnemyManager.h"
 
-EnemyManager::EnemyManager() {
-	//do nothing gitu loh.
+EnemyManager::EnemyManager(Screen* _screenRef) {
+	screenRef = _screenRef;
 }
 
 void EnemyManager::addEnemy(Enemy enemy) {
@@ -52,3 +52,31 @@ void EnemyManager::intersect() {
 		}
 	}
 }
+
+int EnemyManager::getEnemiesSize() const { return (int) enemies.size(); }
+
+void EnemyManager::start(){
+	Color ecolor(255,0,0,0);
+	crosshair.setPosition(Point(0,0));
+	
+	addEnemy(Enemy(Point3D(0,0,1),ecolor));
+	addEnemy(Enemy(Point3D(0,100,500),ecolor));
+	addEnemy(Enemy(Point3D(100,0,1000),ecolor));
+}
+
+void EnemyManager::loop(){
+	crosshair.updateFromKeyboard();
+	if (crosshair.isShooting()){
+		crosshair.shoot(enemies);
+	}
+}
+
+void EnemyManager::draw(){
+	//printf("%d %d %d %d\n",enemies[0].getLeftMostX(),enemies[0].getTopMostY(),enemies[0].getRightMostX(),enemies[0].getBottomMostY());
+	//return;
+	for(int i = 0; i < getEnemiesSize(); i++){
+		screenRef->draw(&enemies[i]);
+	}
+	screenRef->draw(&crosshair);
+}
+

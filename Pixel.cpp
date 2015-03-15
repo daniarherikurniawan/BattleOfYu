@@ -1,14 +1,15 @@
 #include "Pixel.h"
+#include "CameraService.h"
 
 struct Point;
 struct Color;
 
-const float scale = 0.001;
+const double scale = 0.001;
 
 Point Point3D::convertToPoint2D(){
 	Point ret;
-	ret.x = x / z*scale + 1;
-	ret.y = y / z*scale + 1;
+	ret.x = (int) (x / (z*scale + 1));
+	ret.y = (int) (y / (z*scale + 1));
 	return ret;
 }
 

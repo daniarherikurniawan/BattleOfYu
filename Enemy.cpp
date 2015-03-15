@@ -4,26 +4,54 @@ int jari_jari = 5;
 int panjang_badan = 20;
 int tinggi_kaki = 15;
 
-Enemy::Enemy(Point center, Color color) {
+Enemy::Enemy(Point3D center, Color color) {
 	this->color = color;
 	this->center = center;
 	radius = jari_jari;
 }
 
 int Enemy::getLeftMostX() const {
-	return center.x - radius;
+	Point3D p = getCenter();
+	Point3D &cpos = CameraService::position;
+	p.translate(-cpos.x,-cpos.y,cpos.z);
+	p.x -= radius;
+	p.y -= radius;
+	Point q = p.convertToPoint2D();
+	return q.x;
+	//return center.x - radius;
 }
 
 int Enemy::getTopMostY() const {
-	return center.y - radius;
+	Point3D p = getCenter();
+	Point3D &cpos = CameraService::position;
+	p.translate(-cpos.x,-cpos.y,cpos.z);
+	p.x -= radius;
+	p.y -= radius;
+	Point q = p.convertToPoint2D();
+	return q.y; 
+	//return center.y - radius;
 }
 
 int Enemy::getBottomMostY() const {
-	return center.y + radius + panjang_badan + tinggi_kaki;
+	Point3D p = getCenter();
+	Point3D &cpos = CameraService::position;
+	p.translate(-cpos.x,-cpos.y,cpos.z);
+	p.x += radius;
+	p.y += radius + panjang_badan + tinggi_kaki;
+	Point q = p.convertToPoint2D();
+	return q.y;
+	//return center.y + radius + panjang_badan + tinggi_kaki;
 }
 
 int Enemy::getRightMostX() const {
-	return center.x + radius;
+	Point3D p = getCenter();
+	Point3D &cpos = CameraService::position;
+	p.translate(-cpos.x,-cpos.y,cpos.z);
+	p.x += radius;
+	p.y += radius + panjang_badan + tinggi_kaki;
+	Point q =  p.convertToPoint2D();
+	return q.x;
+	//return center.x + radius;
 }
 
 vector<Pixel> Enemy::getPixels() const {
@@ -32,6 +60,7 @@ vector<Pixel> Enemy::getPixels() const {
 	//Gambar kepala
 	int xm = center.x;
 	int ym = center.y;
+	int zm = center.z;
 	int r = radius;
 
 	int x = -r;
@@ -88,20 +117,48 @@ vector<Pixel> Enemy::getPixels() const {
 	vector<Pixel> pixelKakiKanan = kakiKanan.getPixels();
 	pixels.insert(pixels.end(),pixelKakiKanan.begin(),pixelKakiKanan.end());
 
-	return pixels;
+	//atur2 zoom
+	vector<Pixel> zoomed_pixels;
+	for(int i = 0; i < (int) pixels.size(); i++){
+		double scale = 0.001;
+		Point z_p;
+		Point p = pixels[i].getPosition();
+		z_p.x = p.x / (zm*scale + 1);
+		z_p.y = p.y / (zm*scale + 1);
+		zoomed_pixels.push_back(Pixel(z_p,pixels[i].getColor()));
+	}
+	return zoomed_pixels;
 }
 
 void Enemy::rotate(int angle, int x0, int y0) {
 
 }
 
-void Enemy::setCenter(Point c) {
+void Enemy::setCenter(Point3D c) {
 	this->center = c;
 }
 
-Point Enemy::getCenter() const {
+Point3D Enemy::getCenter() const {
 	return center;
 }
+
+void Enemy::beforeDraw() {
+	Point3D &cpos = CameraService::position;
+	this->translate(-cpos.x,-cpos.y,cpos.z);
+}
+
+void Enemy::afterDraw(){
+	Point3D &cpos = CameraService::position;
+	this->translate(cpos.x,cpos.y,-cpos.z);
+}
+
+void Enemy::translate(double dx,double dy,double dz){
+	Point3D &p = this->center;
+	p.x += dx;
+	p.y += dy;
+	p.z += dz;
+}
+
 
 // #ifndef ENEMY_H
 // #define ENEMY_H

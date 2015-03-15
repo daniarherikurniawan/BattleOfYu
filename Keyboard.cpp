@@ -2,6 +2,23 @@
 
 struct termios Keyboard::orig_termios;
 int Keyboard::keyDownCode;
+int Keyboard::bufferedCode = 0;
+
+void Keyboard::setBufferedCode(const char& keycode){
+	Keyboard::bufferedCode = keycode;
+}
+
+int Keyboard::getBufferedCode(){
+	return Keyboard::bufferedCode;
+}	
+
+void Keyboard::updateBufferedCode(){
+	if (Keyboard::isKeyDown()){
+		Keyboard::setBufferedCode(Keyboard::getKeyDownCode());
+	} else {
+		Keyboard::setBufferedCode(0);
+	}
+}
 
 void Keyboard::reset_terminal_mode()
 {

@@ -4,6 +4,7 @@
 #include "Pixel.h"
 #include "Keyboard.h"
 #define DISPLACEMENT 10
+#define CAMERA_MAX_ZOOM 800
 
 class CameraService {
 public:

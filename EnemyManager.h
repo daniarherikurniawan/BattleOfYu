@@ -4,18 +4,33 @@
 #include <vector>
 #include "Enemy.h"
 #include "Crosshair.h"
+#include "Screen.h"
 
 class EnemyManager {
 private:
 	vector<Enemy> enemies;
 	Crosshair crosshair;
+	Screen *screenRef;
+	
 public:
-	EnemyManager();
+	EnemyManager(Screen *screenRef);
+	
+	//dipanggil sekali
+	void start();
+	//dipanggil pas game loop
+	void loop();
+	//dipanggil pas mau ngedraw
+	void draw();
+	
+	int getEnemiesSize() const;
+
+protected:
 	void addEnemy(Enemy enemy);
 	vector<Enemy> getEnemies() const;
 	void setCrosshairPosition(Point p);
 	Point getCrosshairPosition() const;
 	void intersect();
+	
 };
 
 #endif

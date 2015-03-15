@@ -20,9 +20,20 @@ public:
 	static const char KEYBOARD_L = 108;
 	static const char KEYBOARD_Q = 113;
 	static const char KEYBOARD_E = 101;
+	static const char KEYBOARD_F = 102;
+	
+	//kalo ini dipencet huruf X, langsung gg.
+	static const char KEYBOARD_EXIT = 120;
 	static bool isKeyDown();
 	static void startListening();
 	static int getKeyDownCode();
+	
+	//buffercode buat nampung input keyboard
+	static int bufferedCode;
+	static void setBufferedCode(const char& keycode);
+	static int getBufferedCode();
+	static void updateBufferedCode();
+	
 private:
 	static void reset_terminal_mode();
 
