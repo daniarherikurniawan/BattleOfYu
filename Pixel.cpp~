@@ -3,6 +3,19 @@
 struct Point;
 struct Color;
 
+const float scale = 0.001;
+
+Point Point3D::convertToPoint2D(){
+	Point ret;
+	ret.x = x / (z*scale + 1);
+	ret.y = y / (z*scale + 1);
+	return ret;
+}
+
+void Point::translate(int dx,int dy){
+	x += dx; y += dy;
+}
+
 void Pixel::rotate(int angle){
 	Point p = this->getPosition();
 	p.rotate(angle);
@@ -39,42 +52,24 @@ Point::Point(int x,int y) : x(x),y(y) {
 
 }
 
+double Point::crossProduct(Point p,Point q,Point r){
+	return (double) (r.x - q.x) * (p.y - q.y) - (r.y - q.y) * (p.x - q.x);
+}
+
+bool Point::ccwTurn(Point p,Point q,Point r){
+	return Point::crossProduct(p,q,r) > 0.0;
+}
+
+double Point::angle(Point a,Point b,Point c){
+	double ux = b.x - a.x, uy = b.y - a.y;
+	double vx = c.x - a.x, vy = c.y - a.y;
+	return acos((ux * vx + uy * vy) /
+		sqrt((ux * ux + uy * uy) * (vx * vx + vy * vy)));
+}
+
 Point3D::Point3D(): x(0),y(0),z(0){};
 Point3D::Point3D(double x,double y,double z): x(x),y(y),z(z){};
 
-Point Point3D::getPoint2D(Point3D centre,Point3D cameraPos,Point3D pan,double zoom){
-	double temp_x = x;
-	double temp_y = y;
-	double temp_z = z;
-	x = x + cameraPos.x;
-	y = y + cameraPos.y;
-	z = z + cameraPos.z;
-
-	Point3D new_point;
-	new_point.x = x*cos(pan.x) - z*sin(pan.x);
-	new_point.z = x*sin(pan.x) + z*cos(pan.x);
-	new_point.y = y*cos(pan.y) - new_point.z*sin(pan.y);
-
-	z = new_point.y*cos(pan.y) - new_point.z*sin(pan.y);
-	x = new_point.x*cos(pan.z) - new_point.y*sin(pan.z);
-	y = new_point.x*sin(pan.z) + new_point.y*cos(pan.z);
-
-	Point ret;
-	if (z > 0){
-    ret.x = x / z * zoom + centre.x;
-    ret.y = y / z * zoom + centre.y;
-  } 
-  x = temp_x; y = temp_y; z = temp_z;
-  return ret; 
-}
-
-Point Point3D::getPoint2D(){
-  Point3D pan(0,0,100);
-	Point3D cameraPosition(-10,0,0);
-	Point3D center(1024./2,768./2,0);
-	double zoom = 500;
-	return getPoint2D(center,cameraPosition,pan,zoom);
-}
 
 Color::Color() :red(0),green(0),blue(0) {
 
@@ -83,3 +78,4 @@ Color::Color(int red,int green,int blue,int alpha) : red(red),green(green),blue(
 
 }
 
+\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00

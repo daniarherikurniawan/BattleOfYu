@@ -5,6 +5,7 @@
 #include "Enemy.h"
 #include "Crosshair.h"
 #include "Screen.h"
+#include "Mouse.h"
 
 class EnemyManager {
 private:
@@ -23,12 +24,13 @@ public:
 	void draw();
 	
 	int getEnemiesSize() const;
+	void setCrosshairPosition(Point p);
+	Point getCrosshairPosition() const;
 
 protected:
 	void addEnemy(Enemy enemy);
 	vector<Enemy> getEnemies() const;
-	void setCrosshairPosition(Point p);
-	Point getCrosshairPosition() const;
+	
 	void intersect();
 	
 };

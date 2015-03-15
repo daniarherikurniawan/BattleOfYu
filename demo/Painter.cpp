@@ -165,6 +165,7 @@ int main () {
 		screen.draw(&crosshair);
 		CameraService::handleInput();
 		screen.endBatch();
+		
 	}
 	
 	for (int i = 0; i < 12; i++) {

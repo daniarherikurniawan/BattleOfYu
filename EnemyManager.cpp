@@ -66,14 +66,13 @@ void EnemyManager::start(){
 
 void EnemyManager::loop(){
 	crosshair.updateFromKeyboard();
+	//crosshair.setPosition(Mouse::getPositionX(),Mouse::getPositionY());
 	if (crosshair.isShooting()){
 		crosshair.shoot(enemies);
 	}
 }
 
 void EnemyManager::draw(){
-	//printf("%d %d %d %d\n",enemies[0].getLeftMostX(),enemies[0].getTopMostY(),enemies[0].getRightMostX(),enemies[0].getBottomMostY());
-	//return;
 	for(int i = 0; i < getEnemiesSize(); i++){
 		screenRef->draw(&enemies[i]);
 	}

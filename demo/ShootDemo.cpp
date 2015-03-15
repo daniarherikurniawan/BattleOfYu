@@ -7,6 +7,7 @@
 #include "../Polygon3D.h"
 #include <iostream>
 #include "../EnemyManager.h"
+#include "../Mouse.h"
 
 float scale = 0.001;
 
@@ -61,17 +62,24 @@ int main () {
 	CameraService::position.y = 0;
 	CameraService::position.z = 0;
 	Keyboard::startListening();
+	Mouse::startListening();
 	EnemyManager enemyManager(&screen);
 	enemyManager.start();
 	
 	while (1){
+		Mouse::update();
 		Keyboard::updateBufferedCode();
-		screen.beginBatch();
 		CameraService::handleInput();
+		screen.beginBatch();
 		enemyManager.loop();
-		screen.draw(&pcube);
-		screen.draw(&pcube2);
+		
+		//screen.draw(&pcube);
+		//screen.draw(&pcube2);
 		enemyManager.draw();
+		
+		Point cpos = enemyManager.getCrosshairPosition();
+		
+		
 		screen.endBatch();
 	}
 	

@@ -52,7 +52,10 @@ mouse:
 	g++ -o bin/MouseDemo demo/MouseDemo.cpp Util.cpp Mouse.cpp Keyboard.cpp Screen.cpp Pixel.cpp Pesawat.cpp MatrixDrawable.cpp Drawable.cpp CompositeDrawable.cpp Line.cpp ClipDrawable.cpp WorldMap.cpp Rectangle.cpp Plane.cpp Ship.cpp -lrt
 
 painterdemo:
-	g++ -o bin/painterdemo demo/Painter.cpp Pixel.cpp Screen.cpp Line.cpp Drawable.cpp CameraService.cpp Line3D.cpp Keyboard.cpp WorldManager.cpp Polygon3D.cpp Polygon.cpp Crosshair.cpp MatrixDrawable.cpp CompositeDrawable.cpp
+	g++ -o bin/painterdemo demo/Painter.cpp Pixel.cpp Screen.cpp Line.cpp Drawable.cpp CameraService.cpp Line3D.cpp Keyboard.cpp WorldManager.cpp Polygon3D.cpp Polygon.cpp Crosshair.cpp MatrixDrawable.cpp CompositeDrawable.cpp Enemy.cpp
 
 map3ddemo:
 	g++ -o bin/map3d demo/map3D.cpp Pixel.cpp Screen.cpp Line.cpp Drawable.cpp CameraService.cpp Line3D.cpp Keyboard.cpp WorldManager.cpp Polygon3D.cpp Polygon.cpp Crosshair.cpp MatrixDrawable.cpp CompositeDrawable.cpp
+
+shoot:
+	g++ -o bin/shootdemo demo/ShootDemo.cpp Pixel.cpp CameraService.cpp Screen.cpp Line.cpp Drawable.cpp Enemy.cpp Line3D.cpp Keyboard.cpp Polygon3D.cpp Polygon.cpp WorldManager.cpp Crosshair.cpp EnemyManager.cpp Mouse.cpp -lrt 
