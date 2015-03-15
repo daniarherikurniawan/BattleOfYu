@@ -12,6 +12,7 @@ const long long SECONDS_PER_FRAME = 1000/60;
 CompositeDrawable mousePointer("../mousePointer.txt");
 vector<Drawable*> drawables;
 
+
 void handleInput() {
   Mouse::update();
   if (Mouse::isMouseEvent()) {
@@ -29,6 +30,7 @@ void handleInput() {
   }
 }
 
+using namespace std;
 
 int main()
 {
@@ -42,7 +44,9 @@ int main()
   Pixel pixel(position,color);
 
   mousePointer.setPosition(50,50);
-  Mouse::startListening("event3");
+  Mouse::startListening();
+
+  
   while(true){
     if (accumulateTime>SECONDS_PER_FRAME){
       handleInput();
