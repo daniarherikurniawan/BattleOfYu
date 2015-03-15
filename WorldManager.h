@@ -10,8 +10,7 @@
 
 #define MAX_WIDTH 1024
 #define MAX_HEIGHT 768
-class WorldManager : public Drawable{
-	vector<Polygon3D> mPolygons;
+class WorldManager{
 	//resolution
 	int mWidth;
 	int mHeight;
@@ -19,6 +18,7 @@ class WorldManager : public Drawable{
 	
 	
 public:
+	vector<Polygon3D> mPolygons;
 	int getWidth() const;
 	int getHeight() const;
 	int getPolygonSize() const;
@@ -26,7 +26,8 @@ public:
 	void setWidth(int _height);
 	void fillBuffer();
 	vector<Pixel> getPixels() const;
-	
+	void readMap3D(const char*);
+	WorldManager();
 };
 
 #endif

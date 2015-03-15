@@ -34,28 +34,25 @@ polygon3d:
 	g++ -o bin/polygon3d demo/Polygon3DDemo.cpp Pixel.cpp Screen.cpp Line.cpp Drawable.cpp CameraService.cpp Line3D.cpp Keyboard.cpp Polygon3D.cpp Polygon.cpp
 	
 cubedemo:
-	g++ -o bin/cubedemo demo/CubeDemo.cpp Pixel.cpp Screen.cpp Line.cpp Drawable.cpp CameraService.cpp Line3D.cpp Keyboard.cpp Polygon3D.cpp Polygon.cpp WorldManager.cpp Crosshair.cpp Enemy.cpp
+	g++ -o bin/cubedemo demo/CubeDemo.cpp Pixel.cpp Screen.cpp Line.cpp Drawable.cpp CameraService.cpp Line3D.cpp Keyboard.cpp Polygon3D.cpp Polygon.cpp WorldManager.cpp Crosshair.cpp
 	
 line3ddemo:
 	g++ -o bin/line3ddemo demo/Line3DDemo.cpp Pixel.cpp Screen.cpp Line.cpp Drawable.cpp Line3D.cpp
 
 mapdemo:
-	g++ -o bin/mapdemo demo/CubeDemo.cpp Pixel.cpp Screen.cpp Line.cpp Drawable.cpp CameraService.cpp Line3D.cpp Keyboard.cpp WorldManager.cpp Polygon3D.cpp Polygon.cpp
+	g++ -o bin/mapdemo demo/CubeDemo.cpp Pixel.cpp Screen.cpp Line.cpp Drawable.cpp CameraService.cpp Line3D.cpp Keyboard.cpp WorldManager.cpp Polygon3D.cpp Polygon.cpp Crosshair.cpp
 
 colorpicker:
 	g++ colorpicker.cpp -o bin/colorpicker
 
 enemy:
-	g++ -o bin/enemy demo/EnemyDemo.cpp Pixel.cpp CameraService.cpp Screen.cpp Line.cpp Drawable.cpp Enemy.cpp Line3D.cpp Keyboard.cpp Polygon3D.cpp Polygon.cpp WorldManager.cpp Crosshair.cpp -lrt
-
-crosshair:
-	g++ -o bin/crosshair demo/CrosshairDemo.cpp Pixel.cpp CameraService.cpp Screen.cpp Line.cpp Drawable.cpp Enemy.cpp Line3D.cpp Keyboard.cpp Polygon3D.cpp Polygon.cpp WorldManager.cpp Crosshair.cpp -lrt
-
-enemymanager:
-	g++ -o bin/enemymanager demo/EnemyManagerDemo.cpp Pixel.cpp CameraService.cpp Screen.cpp Line.cpp Drawable.cpp Enemy.cpp Line3D.cpp Keyboard.cpp Polygon3D.cpp Polygon.cpp WorldManager.cpp Crosshair.cpp EnemyManager.cpp -lrt
+	g++ -o bin/enemy demo/EnemyDemo.cpp Pixel.cpp Screen.cpp Line.cpp CompositeDrawable.cpp Util.cpp Keyboard.cpp Peluru.cpp Bitmap.cpp MatrixDrawable.cpp Drawable.cpp Enemy.cpp
 
 mouse:
 	g++ -o bin/MouseDemo demo/MouseDemo.cpp Util.cpp Mouse.cpp Keyboard.cpp Screen.cpp Pixel.cpp Pesawat.cpp MatrixDrawable.cpp Drawable.cpp CompositeDrawable.cpp Line.cpp ClipDrawable.cpp WorldMap.cpp Rectangle.cpp Plane.cpp Ship.cpp -lrt
 
-shoot:
-	g++ -o bin/shootdemo demo/ShootDemo.cpp Pixel.cpp CameraService.cpp Screen.cpp Line.cpp Drawable.cpp Enemy.cpp Line3D.cpp Keyboard.cpp Polygon3D.cpp Polygon.cpp WorldManager.cpp Crosshair.cpp EnemyManager.cpp -lrt
+painterdemo:
+	g++ -o bin/painterdemo demo/Painter.cpp Pixel.cpp Screen.cpp Line.cpp Drawable.cpp CameraService.cpp Line3D.cpp Keyboard.cpp WorldManager.cpp Polygon3D.cpp Polygon.cpp Crosshair.cpp MatrixDrawable.cpp CompositeDrawable.cpp
+
+map3ddemo:
+	g++ -o bin/map3d demo/map3D.cpp Pixel.cpp Screen.cpp Line.cpp Drawable.cpp CameraService.cpp Line3D.cpp Keyboard.cpp WorldManager.cpp Polygon3D.cpp Polygon.cpp Crosshair.cpp MatrixDrawable.cpp CompositeDrawable.cpp

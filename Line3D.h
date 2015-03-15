@@ -7,6 +7,7 @@
 
 
 
+
 class Line3D: public Drawable {
 private:
 	Point3D mBeginPoint,mEndPoint;

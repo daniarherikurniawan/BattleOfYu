@@ -32,6 +32,8 @@ public:
 	
 	void translate(double dx,double dy);
 	void translate(double dx,double dy,double dz);
+	
+	vector<Line3D> getAllLine() const{return lines;}
 };
 
 #endif

@@ -3,29 +3,30 @@
 
 
 Point3D CameraService::position(0.,0.,10.);
+float CameraService::mCameraDegreeHorizontal = 0;
+float CameraService::mCameraDegreeVertical = 0;
 
 void CameraService::handleInput(){
 	Point3D &campos = CameraService::position;
-	if (Keyboard::getBufferedCode() != 0){
-		if (Keyboard::getBufferedCode() == Keyboard::KEYBOARD_A){
-			campos.translate(-DISPLACEMENT,0.,0.);
-		} else if (Keyboard::getBufferedCode() == Keyboard::KEYBOARD_D){
+	
+	if (Keyboard::isKeyDown()){
+		if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_A){
 			campos.translate(+DISPLACEMENT,0.,0.);
-		} else if (Keyboard::getBufferedCode() == Keyboard::KEYBOARD_W){
+		} else if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_D){
+			campos.translate(-DISPLACEMENT,0.,0.);
+		} else if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_W){
 			campos.translate(0.,+DISPLACEMENT,0.);
-		} else if (Keyboard::getBufferedCode() == Keyboard::KEYBOARD_S){
+		} else if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_S){
 			campos.translate(0.,-DISPLACEMENT,0.);
-		} else if (Keyboard::getBufferedCode() == Keyboard::KEYBOARD_Q){
+		} else if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_Q){
 			campos.translate(0.,0.,+DISPLACEMENT);
-		} else if (Keyboard::getBufferedCode() == Keyboard::KEYBOARD_E){
+		} else if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_E){
 			campos.translate(0.,0.,-DISPLACEMENT);
-		} else if (Keyboard::getBufferedCode() == Keyboard::KEYBOARD_EXIT){
+		} else if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_L){
 			exit(EXIT_SUCCESS);
+		} else if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_J){
+			CameraService::mCameraDegreeHorizontal += 1;		
 		}
-	}
-	//ada batasan zoom, biar gak segfault
-	if (campos.z < -CAMERA_MAX_ZOOM){
-		campos.z = -CAMERA_MAX_ZOOM;
 	}
 }
 

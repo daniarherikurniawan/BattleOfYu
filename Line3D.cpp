@@ -28,11 +28,11 @@ vector<Pixel> Line3D::getPixels() const{
 Line Line3D::getLine2D() const{
 	Point first, last;
 	//scalenya dihardcode dulu
-	double scale = 0.001;
-	first.x = (getBeginPoint()).x / ((getBeginPoint()).z*scale + 1);
-	first.y = (getBeginPoint()).y / ((getBeginPoint()).z*scale + 1);
-	last.x = (getEndPoint()).x / ((getEndPoint()).z*scale + 1);
-	last.y = (getEndPoint()).y / ((getEndPoint()).z*scale + 1);
+	double scale = 1;
+	first.x = 400 * (getBeginPoint()).x / ((getBeginPoint()).z*scale + 100);
+	first.y = 400 * (getBeginPoint()).y / ((getBeginPoint()).z*scale + 100);
+	last.x =  400 * (getEndPoint()).x / ((getEndPoint()).z*scale + 100);
+	last.y =  400 * (getEndPoint()).y / ((getEndPoint()).z*scale + 100);
 	Color white(255,255,255,0);
 	Line l(first,last,white);
 	return l;
@@ -40,11 +40,27 @@ Line Line3D::getLine2D() const{
 
 void Line3D::beforeDraw(){
 	Point3D &cpos = CameraService::position;
+	Point3D &p1 = mBeginPoint;
+	Point3D &p2 = mEndPoint;
 	this->translate(-cpos.x,-cpos.y,cpos.z);
+	float PI = 3.14159265;
+	float tethaHorizontalInRadian = CameraService::mCameraDegreeHorizontal*PI/180;
+	p1.x = p1.x * cos(tethaHorizontalInRadian) + (p1.z * sin(tethaHorizontalInRadian));
+	p1.z = p1.x * -1 * sin(tethaHorizontalInRadian) + (p1.z * cos(tethaHorizontalInRadian));
+	p2.x = p2.x * cos(tethaHorizontalInRadian) + (p2.z * sin(tethaHorizontalInRadian));
+	p2.z = p2.x * -1 * sin(tethaHorizontalInRadian) + (p2.z * cos(tethaHorizontalInRadian));
 }
 
 void Line3D::afterDraw(){
 	Point3D &cpos = CameraService::position;
+	Point3D &p1 = mBeginPoint;
+	Point3D &p2 = mEndPoint;
+	float PI = 3.14159265;
+	float tethaHorizontalInRadian = -1 * CameraService::mCameraDegreeHorizontal*PI/180;
+	p1.x = p1.x * cos(tethaHorizontalInRadian) + (p1.z * sin(tethaHorizontalInRadian));
+	p1.z = p1.x * -1 * sin(tethaHorizontalInRadian) + (p1.z * cos(tethaHorizontalInRadian));
+	p2.x = p2.x * cos(tethaHorizontalInRadian) + (p2.z * sin(tethaHorizontalInRadian));
+	p2.z = p2.x * -1 * sin(tethaHorizontalInRadian) + (p2.z * cos(tethaHorizontalInRadian));
 	this->translate(cpos.x,cpos.y,-cpos.z);
 }
 
@@ -90,4 +106,3 @@ void Line3D::translate(double x0,double y0,double z0){
 	mBeginPoint.translate(x0,y0,z0);
 	mEndPoint.translate(x0,y0,z0);
 }
-

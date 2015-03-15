@@ -50,6 +50,7 @@ void Screen::draw(Drawable *drawable) {
 	vector<Pixel> pixels = drawable->getPixels();
 	for(int i = 0; i < pixels.size(); i++){
 		Point p = pixels[i].getPosition();
+		p.y *= -1;
 		p.y += SCREEN_OFFSET_HEIGHT;
 		p.x += SCREEN_OFFSET_WIDTH;
 		pixels[i].setPosition(p);

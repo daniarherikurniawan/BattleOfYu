@@ -7,7 +7,7 @@ void gotoxy(int x,int y){
 }
 
 int main() {
-	Enemy enemy (Point(0,0), Color(255,0,0,0));
+	Enemy enemy (Point(20,50), Color(255,0,0,0));
 	Screen screen;
 
 	screen.beginBatch();

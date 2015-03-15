@@ -76,8 +76,11 @@ vector<Point> Polygon::getPointsInside() const {
 
 void Polygon::add(Line line){
 	lines.push_back(line);
+	Point p = getTopLeft();
+	Point p1 = getBottomRight();
+	mHeight = p1.y - p.y + 1;
+	mWidth = p1.x - p.x + 1;
 }
-
 
 int Polygon::getLeftMostX() const {
 	int left_most_x = lines[0].getBeginPoint().x;
@@ -89,7 +92,7 @@ int Polygon::getLeftMostX() const {
 }
 
 int Polygon::getTopMostY() const{
-	int lmy = lines[0].getBeginPoint().x;
+	int lmy = lines[0].getBeginPoint().y;
 	for(unsigned int i = 0; i < lines.size(); i++){
 		int y = min(lines[i].getBeginPoint().y,lines[i].getEndPoint().y);
 		lmy = min(lmy,y);

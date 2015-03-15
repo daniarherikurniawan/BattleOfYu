@@ -22,12 +22,11 @@ void MatrixDrawable::loadFromDrawable(Drawable *drawable) {
   
   mPositionX = 0;
   mPositionY = 0;
-  
   vector<Pixel> pixels = drawable->getPixels();
   for (int i=0;i<pixels.size();i++) {
     int x = pixels[i].getPosition().x - drawable->getLeftMostX();
     int y = pixels[i].getPosition().y - drawable->getTopMostY();
-    if (x>=0 && y>=0) {
+    if (x>=0 && y>=0 && x<mWidth && y<mHeight) {
       mPixelMatrix[y][x] = pixels[i].getColor();
     }
   }
@@ -186,11 +185,12 @@ void MatrixDrawable::fillPattern(Drawable *drawable){
 }
 
 bool MatrixDrawable::isBlank(int x, int y){
+	if (x>= mWidth || x <= 0 || y >= mHeight || y <= 0 )
+		return false;
 	int red = mPixelMatrix[y][x].red;
 	int green = mPixelMatrix[y][x].green;
 	int blue = mPixelMatrix[y][x].blue;
 	int alpha = mPixelMatrix[y][x].alpha;
-
 	if (red == 0 && green == 0 && blue == 0)
 		return true;
 	else

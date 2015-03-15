@@ -4,89 +4,105 @@
 #include "../Line.h"
 #include "../Line3D.h"
 #include "../CameraService.h"
+#include "../Polygon3D.h"
 #include <iostream>
+#include "../Crosshair.h"
 
 Line* transform (Line3D* ln);
 void translate (Line* ln, int x, int y);
+Crosshair crosshair;
 
 float scale = 0.001;
 
+bool sortFunction(Polygon3D a, Polygon3D b) {
+	Point3D &campos = CameraService::position;
+	//if (a.getAllLine)
+	return false;
+}
 int main () {
 	Line3D* cube [12];
 	int length = 100;
 	double speed = 0.01;
-	cube [0] = new Line3D(0,0,0,length,0,0);
-	cube [1] = new Line3D(0,0,0,0,length,0);
-	cube [2] = new Line3D(0,0,0,0,0,length);
-	cube [3] = new Line3D(length,0,0,length,length,0);
-	cube [4] = new Line3D(length,0,0,length,0,length);
-	cube [5] = new Line3D(0,length,0,0,length,length);
-	cube [6] = new Line3D(0,length,0,length,length,0);
-	cube [7] = new Line3D(0,0,length,0,length,length);
-	cube [8] = new Line3D(0,0,length,length,0,length);
-	cube [9] = new Line3D(length,length,0,length,length,length);
-	cube [10] = new Line3D(0,length,length,length,length,length);
-	cube [11] = new Line3D(length,0,length,length,length,length);
-
-	//kubus taruh tengah
-	for (int i = 0; i < 12; i++) {
-		cube[i]->translate(length*3.5,length*3.5,0);
-	}
-
-	Screen screen;
-	//kamera digeser terus ke kanan, ke bawah, terus di zoom
-	//kubusnya bakal gerak ke kiri, ke atas, zoom
+	//U R D L
+	//face
+	cube [0] = new Line3D(0,0,0,0,length,0);
+	cube [1] = new Line3D(0,length,0,length,length,0);
+	cube [2] = new Line3D(length,length,0,length,0,0);
+	cube [3] = new Line3D(length,0,0,0,0,0);
+	//left
+	//cube[0]
+	cube [4] = new Line3D(0,length,0,0,length,length);
+	cube [5] = new Line3D(0,length,length,0,0,length);
+	cube [6] = new Line3D(0,0,length,0,0,0);
+	//right
+	//cube[2]
+	cube[7] = new Line3D(length,length,0,length,length,length);
+	cube[8] = new Line3D(length,length,length,length,0,length);
+	cube[9] = new Line3D(length,0,length,length,0,0);
+	//back
+	cube[10] = new Line3D(0,length,length,length,length,length);
+	cube[11] = new Line3D(0,0,length,length,0,length);
 	
-	//init posisi kamera
-	CameraService::position.x = 0;
-	CameraService::position.y = 0;
-	for (int j = 0; j < 30000; j++) {
-		screen.beginBatch();
-		Point3D cpos = CameraService::position;
-		for (int i = 0; i < 12; i++) {
-			cube[i]->beforeDraw();
-			Line drawedLine = cube[i]->getLine2D();
-			screen.draw(&drawedLine);
-			cube[i]->afterDraw();
-		}
-		screen.endBatch();
-		
-		//update camera
-		if (j < 10000){
-			CameraService::position.x += 0.03;
-		} else if (j < 20000){
-			CameraService::position.y += 0.03;
-		} else {
-			//zoom : semakin kecil semakin besar objeknya
-			CameraService::position.z -= 0.03;
-		}
+	Polygon3D pcube[6];
+	Polygon3D pcube2[6];
+
+	{
+		//face
+		pcube[0].add(cube[0]);
+		pcube[0].add(cube[1]);
+		pcube[0].add(cube[2]);
+		pcube[0].add(cube[3]);
+		//left
+		pcube[1].add(cube[0]);
+		pcube[1].add(cube[4]);
+		pcube[1].add(cube[5]);
+		pcube[1].add(cube[6]);
+		//bottom
+		pcube[2].add(cube[3]);
+		pcube[2].add(cube[9]);
+		pcube[2].add(cube[11]);
+		pcube[2].add(cube[6]);
+		//back
+		pcube[3].add(cube[10]);
+		pcube[3].add(cube[5]);
+		pcube[3].add(cube[11]);
+		pcube[3].add(cube[8]);
+		//right
+		pcube[4].add(cube[2]);
+		pcube[4].add(cube[7]);
+		pcube[4].add(cube[8]);
+		pcube[4].add(cube[9]);
+		//up
+		pcube[5].add(cube[1]);
+		pcube[5].add(cube[4]);
+		pcube[5].add(cube[7]);
+		pcube[5].add(cube[10]);
 	}
 	
-	for (int i = 0; i < 12; i++) {
-		delete cube[i];
-	}
-}
-
-
-Line* transform (Line3D* ln) {
-	Point first, last;
-	first.x = (ln->getBeginPoint()).x / ((ln->getBeginPoint()).z*scale + 1);
-	first.y = (ln->getBeginPoint()).y / ((ln->getBeginPoint()).z*scale + 1);
-	last.x = (ln->getEndPoint()).x / ((ln->getEndPoint()).z*scale + 1);
-	last.y = (ln->getEndPoint()).y / ((ln->getEndPoint()).z*scale + 1);
-	Color white(255,255,255,0);
-	Line* l = new Line(first,last,white);
-	return l;
-}
-
-void translate (Line* ln, int x, int y) {
-	Point p1 = ln->getBeginPoint();
-	Point p2 = ln->getEndPoint();
-	Color c = ln->getColor();
-	p1.x = p1.x + x;
-	p1.y = p1.y + y;
-	p2.x = p2.x + x;
-	p2.y = p2.y + y;
-	ln->setBeginPoint(p1);
-	ln->setEndPoint(p2);
-}
+	{
+		//face
+		pcube2[0].add(cube[0]);
+		pcube2[0].add(cube[1]);
+		pcube2[0].add(cube[2]);
+		pcube2[0].add(cube[3]);
+		//left
+		pcube2[1].add(cube[0]);
+		pcube2[1].add(cube[4]);
+		pcube2[1].add(cube[5]);
+		pcube2[1].add(cube[6]);
+		//bottom
+		pcube2[2].add(cube[3]);
+		pcube2[2].add(cube[9]);
+		pcube2[2].add(cube[11]);
+		pcube2[2].add(cube[6]);
+		//back
+		pcube2[3].add(cube[10]);
+		pcube2[3].add(cube[5]);
+		pcube2[3].add(cube[11]);
+		pcube2[3].add(cube[8]);
+		//right
+		pcube2[4].add(cube[2]);
+		pcube2[4].add(cube[7]);
+		pcube2[4].add(cube[8]);
+		pcube2[4].add(cube[9]);
+		//up
