@@ -18,9 +18,9 @@ void handleInput() {
     if (Mouse::getMouseEventCode() == Mouse::MOUSE_LEFT_PRESS) {
 
     } else if (Mouse::getMouseEventCode() == Mouse::MOUSE_LEFT_RELEASE) {
-      Pesawat *plane = new Pesawat();
-      plane->setPosition(Mouse::getPositionX(),Mouse::getPositionY());
-      drawables.push_back(plane);
+      CompositeDrawable *triangle = new CompositeDrawable("../triangle.txt");
+      triangle->setPosition(Mouse::getPositionX(),Mouse::getPositionY());
+      drawables.push_back(triangle);
     } else if (Mouse::getMouseEventCode() == Mouse::MOUSE_RIGHT_PRESS) {
 
     } else if (Mouse::getMouseEventCode() == Mouse::MOUSE_RIGHT_RELEASE) {

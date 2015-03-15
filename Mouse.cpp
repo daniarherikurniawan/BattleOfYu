@@ -48,7 +48,9 @@ void Mouse::update() {
 }
 
 bool Mouse::isMouseEvent() {
-	return mIsMouseEvent;
+	bool tmp = mIsMouseEvent;
+	mIsMouseEvent = false;
+	return tmp;
 }
 
 int Mouse::getMouseEventCode() {
