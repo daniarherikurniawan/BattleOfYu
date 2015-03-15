@@ -15,6 +15,8 @@ public:
 	Enemy(Point center, Color color);
 	int getLeftMostX() const;
 	int getTopMostY() const;
+	int getBottomMostY() const;
+	int getRightMostX() const;
 	vector<Pixel> getPixels() const;
 	void rotate(int angle,int x0,int y0);
 	void setCenter(Point c);
