@@ -38,3 +38,6 @@ colorpicker:
 
 enemy:
 	g++ -o bin/enemy demo/EnemyDemo.cpp Pixel.cpp Screen.cpp Line.cpp CompositeDrawable.cpp Util.cpp Keyboard.cpp Peluru.cpp Bitmap.cpp MatrixDrawable.cpp Drawable.cpp Enemy.cpp
+
+mouse:
+	g++ -o bin/MouseDemo demo/MouseDemo.cpp Util.cpp Mouse.cpp Keyboard.cpp Screen.cpp Pixel.cpp Pesawat.cpp MatrixDrawable.cpp Drawable.cpp CompositeDrawable.cpp Line.cpp ClipDrawable.cpp WorldMap.cpp Rectangle.cpp Plane.cpp Ship.cpp -lrt
