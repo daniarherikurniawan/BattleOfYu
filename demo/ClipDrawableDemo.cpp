@@ -12,6 +12,7 @@ const long long SECONDS_PER_FRAME = 1000/60;
 WorldMap worldMap("../pulau/peta.txt");
 ClipDrawable clipDrawable(150,150,150,150);
 
+
 void handleInput() {
 	if (Keyboard::isKeyDown()) {
 		if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_D)
@@ -20,6 +21,7 @@ void handleInput() {
 			clipDrawable.panBy(-3,0);
 		else if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_S)
 			clipDrawable.panBy(0,3);
+			
 		else if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_W)
 			clipDrawable.panBy(0,-3);
 		else if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_I)
@@ -62,9 +64,10 @@ int main() {
 	clipDrawable.setWorldMap(worldMap);
 	clipDrawable.setPosition(135,160);
 	Keyboard::startListening();
-	Mouse::startListening("event3");
+	Mouse::startListening();
 
 	CompositeDrawable mousePointer("../mousePointer.txt");
+
 
 	while(true){
 		if (accumulateTime>SECONDS_PER_FRAME){
@@ -94,6 +97,7 @@ int main() {
 					isPlanePositive = true;
 				}
 			}
+			printf("%c[%d;%df",0x1B,199,99);
 
 			clipDrawable.setWorldMap(worldMap);
 			mousePointer.setPosition(Mouse::getPositionX()-mousePointer.getWidth()/2,Mouse::getPositionY()-mousePointer.getHeight()/2);
@@ -101,7 +105,7 @@ int main() {
 			screen.draw(&mousePointer);
 			screen.draw(&worldMap);
 			screen.draw(&clipDrawable);
-			screen.endBatch();
+			screen.endBatch();			
 			while (accumulateTime<(SECONDS_PER_FRAME))
 					accumulateTime -= (SECONDS_PER_FRAME);
 		}

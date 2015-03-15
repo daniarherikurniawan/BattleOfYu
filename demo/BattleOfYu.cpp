@@ -27,20 +27,20 @@ Point endPosition(100,100);
 Color lineColor(255,0,0,0);
 Line line(beginPosition,endPosition,color);
 
-CompositeDrawable c_ship("ship.txt");
+CompositeDrawable c_ship("../ship.txt");
 MatrixDrawable ship(&c_ship);
 
-CompositeDrawable meledak("explosion.txt");
-CompositeDrawable bird("bird.txt");
-CompositeDrawable fish("fish.txt");
-CompositeDrawable parasut("parasut.txt");
+CompositeDrawable meledak("../explosion.txt");
+CompositeDrawable bird("../bird.txt");
+CompositeDrawable fish("../fish.txt");
+CompositeDrawable parasut("../parasut.txt");
 //MatrixDrawable parasut(&c_parasut);
 
 Pesawat plane;
 Roda roda1;
 Roda roda2;
 
-Propeller propeller("propeller.txt");
+Propeller propeller("../propeller.txt");
 
 
 bool isPlane = false;
@@ -79,14 +79,14 @@ void gotoxy(int x,int y){
 
 void handleInput() {
 	if (Keyboard::isKeyDown()) {
-		if (Keyboard::getKeyDownCode() == Keyboard::KEY_D && !isPlane && !isShip){
+		if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_D && !isPlane && !isShip){
 			isFlipShip = false;
 			ship.moveBy(2,0);
-		}else if (Keyboard::getKeyDownCode() == Keyboard::KEY_A && !isPlane && !isShip){
+		}else if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_A && !isPlane && !isShip){
 			isFlipShip = true;
 			ship.moveBy(-2,0);
 			
-		}else if (Keyboard::getKeyDownCode() == Keyboard::KEY_L && !isPlane && !isShip){
+		}else if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_L && !isPlane && !isShip){
 			if (!isFlipPlane){
 				propeller.moveBy(-90,0);
 				roda1.moveBy(20,0);
@@ -99,7 +99,7 @@ void handleInput() {
 			roda2.moveBy(2,0);
 			parasut.moveBy(2,0);
 			
-		}else if (Keyboard::getKeyDownCode() == Keyboard::KEY_J && !isPlane && !isShip){
+		}else if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_J && !isPlane && !isShip){
 			if (isFlipPlane){
 				propeller.moveBy(90,0);
 				roda1.moveBy(-20,0);
@@ -111,9 +111,9 @@ void handleInput() {
 			roda1.moveBy(-2,0);
 			roda2.moveBy(-2,0);
 			parasut.moveBy(-2,0);
-		}else if (Keyboard::getKeyDownCode() == Keyboard::KEY_W)
+		}else if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_W)
 			exit(0);
-		else if (Keyboard::getKeyDownCode() == Keyboard::KEY_S && !isPlane && !isShip){
+		else if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_S && !isPlane && !isShip){
 			int pos = peluruKosong();
 			if (pos != -1){
 				b[pos] = bf.create(BulletFactory::LASER);
@@ -122,7 +122,7 @@ void handleInput() {
 				b[pos]->setPoint(Point(st.x + 115, st.y + 60));
 			}
 		}
-		else if (Keyboard::getKeyDownCode() == Keyboard::KEY_K && !isPlane && !isShip){
+		else if (Keyboard::getKeyDownCode() == Keyboard::KEYBOARD_K && !isPlane && !isShip){
 			int pos = peluruKosong();
 			if (pos != -1){
 				b[pos] = bf.create(BulletFactory::LASER);
@@ -186,7 +186,7 @@ int main() {
 		if (accumulateTime>(SECONDS_PER_FRAME)) {
 			handleInput();
 			
-			
+			printf("%c[%d;%df",0x1B,199,99);
 			screen.beginBatch();
 			
 			
@@ -225,8 +225,8 @@ int main() {
 			  	  isPlane = false;
 			      //isAftermath = true;
 
-				gotoxy(1, 10);
-			      printf("\t\tSHIP WIN!\n\n\n\n\n\n\n\n\n\n");
+				//gotoxy(1, 10);
+			      //printf("\t\tSHIP WIN!\n\n\n\n\n\n\n\n\n\n");
 			      isFinish = true;
 
 				  /* TODO:
@@ -263,8 +263,8 @@ int main() {
 			  if (shipEx > 2){
 			      screen.beginBatch();
 			      screen.endBatch();
-			      gotoxy(10, 10);
-			      printf("PLANE WIN!\n\n\n\n\n\n\n\n\n\n");
+			      //gotoxy(10, 10);
+			      //printf("PLANE WIN!\n\n\n\n\n\n\n\n\n\n");
 			      isFinish = true;
 			      isShip = false;
 			  }
@@ -328,10 +328,10 @@ int main() {
 					screen.draw(&plane, isFlipPlane); // ini buat gambar object2 yang udah berserakan di tanah
 					screen.endBatch();
 
-					gotoxy(10,10);
-					printf("Ship Wins!\n\n\n\n\n");
-					gotoxy(40,40);
-					printf("\n");
+					//gotoxy(10,10);
+				//	printf("Ship Wins!\n\n\n\n\n");
+				//	gotoxy(40,40);
+				//	printf("\n");
 				}
 			}
 

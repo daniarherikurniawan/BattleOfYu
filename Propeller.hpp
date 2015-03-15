@@ -71,7 +71,7 @@ Propeller::Propeller(string filename){
 }
 
 Propeller::Propeller(){
-	c_draw_elmt = new CompositeDrawable("propeller.txt");
+	c_draw_elmt = new CompositeDrawable("../propeller.txt");
 	//m_draw_elmt = new MatrixDrawable(c_draw_elmt);
 	current_counter = 0;
 	speed = PROPELLER_DEFAULT_SPEED;

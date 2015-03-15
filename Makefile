@@ -2,7 +2,13 @@ pixel:
 	g++ -o bin/PixelDemo demo/PixelDemo.cpp Pixel.cpp Screen.cpp Line.cpp CompositeDrawable.cpp Util.cpp Keyboard.cpp MatrixDrawable.cpp Drawable.cpp -lrt
 
 build:
-	g++ -o bin/ClipDemo demo/ClipDrawableDemo.cpp Plane.cpp Ship.cpp WorldMap.cpp Pixel.cpp Screen.cpp Line.cpp CompositeDrawable.cpp Util.cpp Keyboard.cpp MatrixDrawable.cpp Drawable.cpp ClipDrawable.cpp Rectangle.cpp
+	g++ -o bin/ClipDemo demo/ClipDrawableDemo.cpp Plane.cpp Ship.cpp WorldMap.cpp Pixel.cpp Screen.cpp Line.cpp CompositeDrawable.cpp Util.cpp Keyboard.cpp MatrixDrawable.cpp Drawable.cpp ClipDrawable.cpp Rectangle.cpp Mouse.cpp Story.cpp
+
+utama:
+	g++ -o bin/BattleOfYu demo/BattleOfYu.cpp Pixel.cpp Screen.cpp Line.cpp CompositeDrawable.cpp Util.cpp Keyboard.cpp Peluru.cpp Bitmap.cpp MatrixDrawable.cpp Drawable.cpp Roda.cpp Pesawat.cpp -lrt
+	g++ -o bin/ClipDemo demo/ClipDrawableDemo.cpp Plane.cpp Ship.cpp WorldMap.cpp Pixel.cpp Screen.cpp Line.cpp CompositeDrawable.cpp Util.cpp Keyboard.cpp MatrixDrawable.cpp Drawable.cpp ClipDrawable.cpp Rectangle.cpp Mouse.cpp Story.cpp
+	g++ -o bin/ColorPicker colorpicker.cpp
+	g++ -o bin/Utama demo/Utama.cpp Plane.cpp Ship.cpp WorldMap.cpp Pixel.cpp Screen.cpp Line.cpp CompositeDrawable.cpp Util.cpp Keyboard.cpp MatrixDrawable.cpp Drawable.cpp ClipDrawable.cpp Rectangle.cpp Story.cpp Pesawat.cpp
 
 roda: rodaDemos.cpp
 	g++ -o bin/roda demo/rodaDemos.cpp Pixel.cpp Screen.cpp Line.cpp CompositeDrawable.cpp Util.cpp Keyboard.cpp Peluru.cpp Bitmap.cpp MatrixDrawable.cpp Drawable.cpp Roda.cpp

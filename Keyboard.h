@@ -21,8 +21,9 @@ public:
 	static bool isKeyDown();
 	static void startListening();
 	static int getKeyDownCode();
-private:
 	static void reset_terminal_mode();
+private:
+	
 
 	static void set_conio_terminal_mode();
 

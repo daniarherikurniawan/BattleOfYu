@@ -462,7 +462,7 @@ int main() {
 		printf("Sample Color:");
 
 		// print info R,G,B dari sample color
-		gotoxy(0, 25);
+		gotoxy(100, 50);
 
 		// baca input
 		c = getch();
@@ -504,7 +504,7 @@ int main() {
 	munmap(fbp, screensize);
 	close(fbfd);
 	
-	printf("Warna yang anda pilih:\nR: %d\nG: %d\nB: %d\n\n", c_r, c_g, c_b);
+	//printf("Warna yang anda pilih:\nR: %d\nG: %d\nB: %d\n\n", c_r, c_g, c_b);
 	
 	return 0;
 } 
